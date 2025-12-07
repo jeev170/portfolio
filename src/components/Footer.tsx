@@ -1,22 +1,25 @@
 import { motion } from "framer-motion";
-import { Heart, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Heart } from "lucide-react";
 
-const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Mail, href: "#", label: "Email" },
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Photos", href: "#photos" },
+  { name: "Blog", href: "#blog" },
+  { name: "Skills", href: "#skills" },
+  { name: "Lab", href: "#lab" },
+  { name: "Quotes", href: "#quotes" },
 ];
 
 export const Footer = () => {
   return (
-    <footer className="relative py-20 overflow-hidden">
+    <footer className="relative py-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
-          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -24,33 +27,26 @@ export const Footer = () => {
         >
           {/* Logo */}
           <motion.h3
-            className="font-syne text-3xl font-bold text-gradient mb-6"
+            className="font-syne text-3xl font-bold text-gradient text-center mb-8"
             whileHover={{ scale: 1.05 }}
           >
             Dreamscape
           </motion.h3>
 
-          {/* Tagline */}
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Crafting ethereal digital experiences from the depths of imagination
-          </p>
-
-          {/* Social Links */}
-          <div className="flex justify-center gap-4 mb-12">
-            {socialLinks.map((social, index) => (
+          {/* Navigation Links */}
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            {navLinks.map((link, index) => (
               <motion.a
-                key={social.label}
-                href={social.href}
-                className="glass p-3 rounded-full hover:bg-primary/20 transition-all group"
-                initial={{ opacity: 0, y: 20 }}
+                key={link.name}
+                href={link.href}
+                className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={social.label}
+                whileHover={{ y: -2 }}
               >
-                <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                {link.name}
               </motion.a>
             ))}
           </div>
@@ -59,12 +55,12 @@ export const Footer = () => {
           <div className="w-32 h-px bg-gradient-cosmic mx-auto mb-8 opacity-50" />
 
           {/* Copyright */}
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2 mb-2">
             Made with{" "}
             <Heart className="w-4 h-4 text-cosmic-pink fill-cosmic-pink animate-pulse" />{" "}
             in the cosmos
           </p>
-          <p className="text-xs text-muted-foreground/60 mt-2">
+          <p className="text-xs text-muted-foreground/60 text-center">
             © 2024 Dreamscape. All rights reserved.
           </p>
         </motion.div>
