@@ -5,7 +5,10 @@ import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
 import { Photography } from "@/components/Photography";
 import { Blog } from "@/components/Blog";
+import { Skills } from "@/components/Skills";
+import { CreativeLab } from "@/components/CreativeLab";
 import { Quotes } from "@/components/Quotes";
+import { Connect } from "@/components/Connect";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -24,7 +27,10 @@ const Index = () => {
         <Projects />
         <Photography />
         <Blog />
+        <Skills />
+        <CreativeLab />
         <Quotes />
+        <Connect />
       </main>
 
       {/* Footer */}
