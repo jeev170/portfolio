@@ -69,47 +69,47 @@ const experiences = [
 
 export const Blog = () => {
   return (
-    <section id="blog" className="relative py-32 overflow-hidden">
+    <section id="blog" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Title */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-syne text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="font-syne text-3xl md:text-6xl font-bold mb-4">
             <span className="text-foreground">My</span>{" "}
             <span className="text-gradient">Experiences</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg max-w-lg mx-auto">
             Stories, reflections, and lessons from my journey through the creative cosmos
           </p>
         </motion.div>
 
         {/* Featured Post */}
         <motion.article
-          className="mb-12 max-w-4xl mx-auto"
+          className="mb-8 md:mb-12 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.div
-            className="glass-strong rounded-3xl p-8 md:p-12 bg-gradient-to-br from-cosmic-purple/20 via-cosmic-pink/10 to-cosmic-blue/20 cursor-pointer group overflow-hidden relative"
+            className="glass-strong rounded-2xl md:rounded-3xl p-5 md:p-12 bg-gradient-to-br from-cosmic-purple/20 via-cosmic-pink/10 to-cosmic-blue/20 cursor-pointer group overflow-hidden relative"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             {/* Featured badge */}
             <motion.span 
-              className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-xs font-medium mb-6"
+              className="inline-flex items-center gap-2 glass px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-medium mb-4 md:mb-6"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -119,48 +119,48 @@ export const Blog = () => {
               Featured Story
             </motion.span>
 
-            <h3 className="font-syne text-2xl md:text-4xl font-bold mb-4 group-hover:text-gradient transition-all">
+            <h3 className="font-syne text-xl md:text-4xl font-bold mb-3 md:mb-4 group-hover:text-gradient transition-all">
               {experiences[0].title}
             </h3>
             
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-2xl">
+            <p className="text-muted-foreground text-sm md:text-lg leading-relaxed mb-4 md:mb-6 max-w-2xl">
               {experiences[0].excerpt}
             </p>
 
             {/* Meta */}
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-8">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+            <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-sm text-muted-foreground mb-6 md:mb-8">
+              <span className="flex items-center gap-1 md:gap-2">
+                <Calendar className="w-3 h-3 md:w-4 md:h-4" />
                 {experiences[0].date}
               </span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
+              <span className="flex items-center gap-1 md:gap-2">
+                <Clock className="w-3 h-3 md:w-4 md:h-4" />
                 {experiences[0].readTime}
               </span>
               {experiences[0].location && (
-                <span className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
+                <span className="flex items-center gap-1 md:gap-2">
+                  <MapPin className="w-3 h-3 md:w-4 md:h-4" />
                   {experiences[0].location}
                 </span>
               )}
             </div>
 
             <motion.span
-              className="inline-flex items-center gap-2 text-primary font-medium"
+              className="inline-flex items-center gap-2 text-primary font-medium text-sm md:text-base"
               whileHover={{ x: 5 }}
             >
               Read Full Story
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </motion.span>
 
             {/* Decorative gradient orbs */}
-            <div className="absolute -top-20 -right-20 w-60 h-60 bg-cosmic-purple/20 rounded-full blur-3xl group-hover:bg-cosmic-purple/30 transition-all" />
-            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-cosmic-pink/20 rounded-full blur-3xl group-hover:bg-cosmic-pink/30 transition-all" />
+            <div className="absolute -top-20 -right-20 w-40 md:w-60 h-40 md:h-60 bg-cosmic-purple/20 rounded-full blur-3xl group-hover:bg-cosmic-purple/30 transition-all" />
+            <div className="absolute -bottom-20 -left-20 w-32 md:w-40 h-32 md:h-40 bg-cosmic-pink/20 rounded-full blur-3xl group-hover:bg-cosmic-pink/30 transition-all" />
           </motion.div>
         </motion.article>
 
         {/* Experience Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
           {experiences.slice(1).map((post, index) => (
             <motion.article
               key={post.id}
@@ -171,7 +171,7 @@ export const Blog = () => {
               viewport={{ once: true }}
             >
               <motion.div
-                className={`glass-strong rounded-2xl p-6 h-full bg-gradient-to-br ${post.gradient} cursor-pointer relative overflow-hidden`}
+                className={`glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 h-full bg-gradient-to-br ${post.gradient} cursor-pointer relative overflow-hidden`}
                 whileHover={{
                   scale: 1.03,
                   y: -5,
@@ -179,12 +179,12 @@ export const Blog = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {/* Icon */}
-                <div className="w-10 h-10 rounded-xl glass flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <post.icon className="w-5 h-5 text-primary" />
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl glass flex items-center justify-center mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
+                  <post.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
 
                 {/* Meta */}
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+                <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {post.date}
@@ -196,16 +196,16 @@ export const Blog = () => {
                 </div>
 
                 {/* Content */}
-                <h3 className="font-syne text-lg font-bold mb-3 group-hover:text-gradient transition-all line-clamp-2">
+                <h3 className="font-syne text-base md:text-lg font-bold mb-2 md:mb-3 group-hover:text-gradient transition-all line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-3">
+                <p className="text-muted-foreground text-xs md:text-sm leading-relaxed mb-4 md:mb-6 line-clamp-3">
                   {post.excerpt}
                 </p>
 
                 {/* Location if exists */}
                 {post.location && (
-                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground mb-4">
+                  <span className="inline-flex items-center gap-1 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
                     <MapPin className="w-3 h-3" />
                     {post.location}
                   </span>
@@ -213,15 +213,15 @@ export const Blog = () => {
 
                 {/* Read More */}
                 <motion.span
-                  className="inline-flex items-center gap-2 text-primary text-sm font-medium"
+                  className="inline-flex items-center gap-2 text-primary text-xs md:text-sm font-medium"
                   whileHover={{ x: 5 }}
                 >
                   Read More
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                 </motion.span>
 
                 {/* Glass reflection effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl md:rounded-2xl pointer-events-none" />
               </motion.div>
             </motion.article>
           ))}

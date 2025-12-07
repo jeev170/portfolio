@@ -33,25 +33,25 @@ export const Navigation = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "glass-strong py-3" : "py-5"
+          scrolled ? "glass-strong py-2 md:py-3" : "py-3 md:py-5"
         }`}
       >
-        <div className="container mx-auto px-6 flex items-center justify-between">
+        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
           <motion.a
             href="#home"
-            className="font-syne text-xl md:text-2xl font-bold text-gradient"
+            className="font-syne text-lg md:text-2xl font-bold text-gradient"
             whileHover={{ scale: 1.05 }}
           >
-            Dreamscape
+            Jeevietha
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
+                className="text-xs xl:text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.05 }}
@@ -74,7 +74,7 @@ export const Navigation = () => {
           {/* Desktop CTA */}
           <motion.a
             href="#connect"
-            className="hidden lg:flex glass px-5 py-2 rounded-full text-sm font-medium hover:bg-primary/20 transition-all glow-primary"
+            className="hidden lg:flex glass px-4 xl:px-5 py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-primary/20 transition-all glow-primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -97,20 +97,20 @@ export const Navigation = () => {
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
-              className="absolute top-20 left-4 right-4 glass-strong rounded-2xl p-6"
+              className="absolute top-16 left-4 right-4 glass-strong rounded-2xl p-4 md:p-6"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
                     href={item.href}
-                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors py-2 border-b border-border/30 last:border-0"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2 px-2 rounded-lg hover:bg-primary/10"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.03 }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
