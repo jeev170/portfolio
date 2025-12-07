@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight, MapPin, Briefcase, Heart, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Calendar, Clock, ArrowRight, MapPin, Briefcase, Heart, Sparkles, X } from "lucide-react";
 
 const experiences = [
   {
@@ -7,6 +8,7 @@ const experiences = [
     type: "conference",
     title: "Speaking at DevCon 2024",
     excerpt: "Reflections on presenting 'The Future of Spatial Interfaces' to 500+ developers and the unexpected connections made.",
+    fullContent: "What started as a terrifying opportunity turned into one of the most rewarding experiences of my career. Standing on that stage, looking at 500+ developers, I realized something important: we're all just figuring things out together. The Q&A session afterwards led to three coffee chats, two collaboration ideas, and one amazing friendship that continues today.",
     date: "Nov 28, 2024",
     readTime: "5 min",
     location: "San Francisco",
@@ -18,6 +20,7 @@ const experiences = [
     type: "career",
     title: "Joining Stellar Labs",
     excerpt: "A new chapter begins. Why I chose to pursue my passion for immersive experiences at a cutting-edge startup.",
+    fullContent: "Sometimes the scariest decisions lead to the most growth. Leaving a comfortable position for a startup felt risky, but following my curiosity about immersive experiences was worth it. Three months in, I've learned more than I did in two years at my previous role. The lesson? Bet on yourself, especially when it scares you.",
     date: "Oct 15, 2024",
     readTime: "8 min",
     location: "Remote",
@@ -29,6 +32,7 @@ const experiences = [
     type: "learning",
     title: "Lessons from Burnout",
     excerpt: "The hard truths I learned about sustainable creativity and why taking breaks made me a better creator.",
+    fullContent: "I used to wear 14-hour workdays like a badge of honor. Then my body said 'enough.' Burnout taught me that rest isn't lazy—it's strategic. Now I protect my weekends, take real vacations, and surprisingly, I'm more productive and creative than ever. Your brain needs downtime to connect dots and generate ideas.",
     date: "Sep 20, 2024",
     readTime: "6 min",
     gradient: "from-cosmic-pink/30 to-cosmic-purple/30",
@@ -39,6 +43,7 @@ const experiences = [
     type: "conference",
     title: "AI Design Summit Tokyo",
     excerpt: "Exploring how Japanese design philosophy is shaping the future of human-AI interaction and creative tools.",
+    fullContent: "Tokyo taught me that the best interfaces are invisible. Japanese designers approach AI differently—not as a replacement for human creativity, but as a quiet partner that enhances it. The concept of 'ma' (negative space) applies beautifully to AI: sometimes what the AI doesn't do matters as much as what it does.",
     date: "Aug 10, 2024",
     readTime: "7 min",
     location: "Tokyo",
@@ -50,6 +55,7 @@ const experiences = [
     type: "story",
     title: "The Project That Changed Everything",
     excerpt: "How a failed side project taught me more about product design than any successful launch ever did.",
+    fullContent: "I spent six months building an app nobody wanted. It hurt. But that failure forced me to actually talk to users before building. Now I prototype in conversations before I prototype in code. The app never launched, but the lesson shaped every successful project since. Fail fast, learn faster.",
     date: "Jul 05, 2024",
     readTime: "10 min",
     gradient: "from-cosmic-purple/30 to-cosmic-blue/30",
@@ -60,6 +66,7 @@ const experiences = [
     type: "learning",
     title: "Finding My Creative Voice",
     excerpt: "The journey from copying others' styles to developing a unique aesthetic that feels authentically mine.",
+    fullContent: "For years, I tried to design like the people I admired. Everything felt like a pale imitation. The breakthrough came when I started designing for an audience of one: myself. When I stopped worrying about trends and started following my weird instincts, my work finally felt authentic. Originality isn't about being different—it's about being honest.",
     date: "Jun 12, 2024",
     readTime: "9 min",
     gradient: "from-cosmic-pink/30 to-cosmic-cyan/30",
@@ -68,6 +75,8 @@ const experiences = [
 ];
 
 export const Blog = () => {
+  const [selectedPost, setSelectedPost] = useState<typeof experiences[0] | null>(null);
+
   return (
     <section id="blog" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
@@ -90,7 +99,7 @@ export const Blog = () => {
             <span className="text-gradient">Experiences</span>
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-lg mx-auto">
-            Stories, reflections, and lessons from my journey through the creative cosmos
+            Honest stories, messy learnings, and the occasional "aha!" moment
           </p>
         </motion.div>
 
@@ -106,6 +115,7 @@ export const Blog = () => {
             className="glass-strong rounded-2xl md:rounded-3xl p-5 md:p-12 bg-gradient-to-br from-cosmic-purple/20 via-cosmic-pink/10 to-cosmic-blue/20 cursor-pointer group overflow-hidden relative"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
+            onClick={() => setSelectedPost(experiences[0])}
           >
             {/* Featured badge */}
             <motion.span 
@@ -177,6 +187,7 @@ export const Blog = () => {
                   y: -5,
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
+                onClick={() => setSelectedPost(post)}
               >
                 {/* Icon */}
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl glass flex items-center justify-center mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
@@ -227,6 +238,76 @@ export const Blog = () => {
           ))}
         </div>
       </div>
+
+      {/* Post Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-2xl p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPost(null)}
+          >
+            <motion.div
+              className="relative max-w-2xl w-full glass-strong rounded-2xl md:rounded-3xl p-6 md:p-10 max-h-[80vh] overflow-y-auto"
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                className="absolute top-4 right-4 glass p-2 rounded-full hover:bg-primary/20 transition-all"
+                onClick={() => setSelectedPost(null)}
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Icon */}
+              <div className="w-12 h-12 rounded-xl glass flex items-center justify-center mb-6">
+                <selectedPost.icon className="w-6 h-6 text-primary" />
+              </div>
+
+              {/* Meta */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+                <span className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  {selectedPost.date}
+                </span>
+                <span className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  {selectedPost.readTime}
+                </span>
+                {selectedPost.location && (
+                  <span className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    {selectedPost.location}
+                  </span>
+                )}
+              </div>
+
+              {/* Title */}
+              <h2 className="font-syne text-2xl md:text-4xl font-bold mb-6 text-gradient">
+                {selectedPost.title}
+              </h2>
+
+              {/* Content */}
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
+                {selectedPost.fullContent}
+              </p>
+
+              {/* Reflection prompt */}
+              <div className="glass rounded-xl p-4 border-l-4 border-primary">
+                <p className="text-sm text-foreground italic">
+                  "Every experience teaches us something. What's yours?"
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

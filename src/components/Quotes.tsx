@@ -6,71 +6,53 @@ const quotes = [
     id: 1,
     text: "The only way to do great work is to love what you do.",
     author: "Steve Jobs",
-    x: 30,
-    y: 25,
-    size: "lg",
   },
   {
     id: 2,
     text: "Imagination is the beginning of creation.",
     author: "George Bernard Shaw",
-    x: 50,
-    y: 15,
-    size: "md",
   },
   {
     id: 3,
     text: "We are made of star stuff.",
     author: "Carl Sagan",
-    x: 70,
-    y: 30,
-    size: "lg",
   },
   {
     id: 4,
     text: "Design is intelligence made visible.",
     author: "Alina Wheeler",
-    x: 25,
-    y: 55,
-    size: "sm",
   },
   {
     id: 5,
     text: "Creativity takes courage.",
     author: "Henri Matisse",
-    x: 45,
-    y: 70,
-    size: "md",
   },
   {
     id: 6,
     text: "The future belongs to those who believe in the beauty of their dreams.",
     author: "Eleanor Roosevelt",
-    x: 75,
-    y: 60,
-    size: "sm",
   },
 ];
 
-// Cancer constellation pattern - the crab shape
+// Cancer constellation pattern - the crab shape with quotes positioned around stars
 const cancerStars = [
-  { x: 35, y: 30, size: 4 },  // Acubens (α)
-  { x: 45, y: 25, size: 5 },  // Altarf (β) - brightest
-  { x: 55, y: 28, size: 4 },  // Asellus Australis (δ)
-  { x: 60, y: 35, size: 3 },  // Asellus Borealis (γ)
-  { x: 50, y: 45, size: 4 },  // Tegmine (ζ)
-  { x: 40, y: 42, size: 3 },  // ι Cancri
-  { x: 48, y: 35, size: 6 },  // Praesepe (Beehive cluster center)
+  { x: 30, y: 25, size: 5, quoteIndex: 0 },  // Acubens (α)
+  { x: 45, y: 18, size: 6, quoteIndex: 1 },  // Altarf (β) - brightest
+  { x: 60, y: 22, size: 5, quoteIndex: 2 },  // Asellus Australis (δ)
+  { x: 70, y: 32, size: 4, quoteIndex: null },  // Asellus Borealis (γ)
+  { x: 50, y: 50, size: 5, quoteIndex: 3 },  // Tegmine (ζ)
+  { x: 35, y: 45, size: 4, quoteIndex: 4 },  // ι Cancri
+  { x: 48, y: 35, size: 7, quoteIndex: 5 },  // Praesepe (Beehive cluster center)
 ];
 
 const cancerLines = [
-  { from: { x: 35, y: 30 }, to: { x: 45, y: 25 } },
-  { from: { x: 45, y: 25 }, to: { x: 48, y: 35 } },
-  { from: { x: 48, y: 35 }, to: { x: 55, y: 28 } },
-  { from: { x: 55, y: 28 }, to: { x: 60, y: 35 } },
-  { from: { x: 48, y: 35 }, to: { x: 50, y: 45 } },
-  { from: { x: 50, y: 45 }, to: { x: 40, y: 42 } },
-  { from: { x: 40, y: 42 }, to: { x: 35, y: 30 } },
+  { from: { x: 30, y: 25 }, to: { x: 45, y: 18 } },
+  { from: { x: 45, y: 18 }, to: { x: 48, y: 35 } },
+  { from: { x: 48, y: 35 }, to: { x: 60, y: 22 } },
+  { from: { x: 60, y: 22 }, to: { x: 70, y: 32 } },
+  { from: { x: 48, y: 35 }, to: { x: 50, y: 50 } },
+  { from: { x: 50, y: 50 }, to: { x: 35, y: 45 } },
+  { from: { x: 35, y: 45 }, to: { x: 30, y: 25 } },
 ];
 
 export const Quotes = () => {
@@ -89,12 +71,12 @@ export const Quotes = () => {
           <span className="text-foreground">Wisdom</span>
         </h2>
         <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
-          Constellations of inspiration - featuring Cancer ♋
+          Words that guide me through the cosmos — featuring Cancer ♋
         </p>
       </motion.div>
 
       {/* Constellation Map */}
-      <div className="relative max-w-6xl mx-auto h-[500px] md:h-[600px] px-4 md:px-6">
+      <div className="relative max-w-5xl mx-auto h-[600px] md:h-[700px] px-4 md:px-6">
         {/* SVG Cancer Constellation Lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {cancerLines.map((line, index) => (
@@ -104,8 +86,8 @@ export const Quotes = () => {
               y1={`${line.from.y}%`}
               x2={`${line.to.x}%`}
               y2={`${line.to.y}%`}
-              stroke="hsl(var(--primary) / 0.4)"
-              strokeWidth="1.5"
+              stroke="hsl(var(--primary) / 0.5)"
+              strokeWidth="2"
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               transition={{ duration: 1.5, delay: index * 0.15 }}
@@ -114,11 +96,11 @@ export const Quotes = () => {
           ))}
         </svg>
 
-        {/* Cancer Constellation Stars */}
+        {/* Cancer Constellation Stars with Quotes */}
         {cancerStars.map((star, index) => (
           <motion.div
             key={`cancer-star-${index}`}
-            className="absolute"
+            className="absolute group"
             style={{
               left: `${star.x}%`,
               top: `${star.y}%`,
@@ -130,60 +112,10 @@ export const Quotes = () => {
             viewport={{ once: true }}
           >
             <motion.div
-              animate={{
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div 
-                className="rounded-full bg-primary"
-                style={{ 
-                  width: `${star.size * 2}px`, 
-                  height: `${star.size * 2}px`,
-                  boxShadow: `0 0 ${star.size * 4}px hsl(var(--primary)), 0 0 ${star.size * 8}px hsl(var(--primary) / 0.5)` 
-                }} 
-              />
-            </motion.div>
-          </motion.div>
-        ))}
-
-        {/* Cancer label */}
-        <motion.div
-          className="absolute glass px-3 md:px-4 py-1.5 md:py-2 rounded-full"
-          style={{ left: "48%", top: "52%", transform: "translate(-50%, 0)" }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-primary font-syne font-bold text-xs md:text-sm">Cancer ♋</span>
-        </motion.div>
-
-        {/* Quote Stars */}
-        {quotes.map((quote, index) => (
-          <motion.div
-            key={quote.id}
-            className="absolute group cursor-pointer hidden md:block"
-            style={{
-              left: `${quote.x}%`,
-              top: `${quote.y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            {/* Star Point */}
-            <motion.div
-              className="relative"
+              className="relative cursor-pointer"
               whileHover={{ scale: 1.5 }}
               animate={{
-                opacity: [0.4, 0.8, 0.4],
+                opacity: [0.7, 1, 0.7],
               }}
               transition={{
                 opacity: {
@@ -193,36 +125,62 @@ export const Quotes = () => {
                 },
               }}
             >
-              <div className="w-2 h-2 rounded-full bg-accent" style={{ boxShadow: "0 0 10px hsl(var(--accent))" }} />
+              <div 
+                className="rounded-full bg-primary"
+                style={{ 
+                  width: `${star.size * 3}px`, 
+                  height: `${star.size * 3}px`,
+                  boxShadow: `0 0 ${star.size * 6}px hsl(var(--primary)), 0 0 ${star.size * 12}px hsl(var(--primary) / 0.5)` 
+                }} 
+              />
             </motion.div>
 
-            {/* Quote Tooltip */}
-            <motion.div
-              className={`absolute z-50 glass-strong rounded-2xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
-                quote.x > 50 ? "right-6" : "left-6"
-              } ${quote.y > 50 ? "bottom-6" : "top-6"}`}
-              style={{
-                width: quote.size === "lg" ? "280px" : quote.size === "md" ? "220px" : "180px",
-              }}
-              initial={{ scale: 0.8 }}
-              whileHover={{ scale: 1 }}
-            >
-              <Quote className="w-4 h-4 text-primary mb-2" />
-              <p className={`text-foreground leading-relaxed mb-2 ${
-                quote.size === "lg" ? "text-sm" : "text-xs"
-              }`}>
-                "{quote.text}"
-              </p>
-              <p className="text-xs text-muted-foreground">— {quote.author}</p>
-            </motion.div>
+            {/* Quote Tooltip - shows on hover */}
+            {star.quoteIndex !== null && quotes[star.quoteIndex] && (
+              <motion.div
+                className={`absolute z-50 glass-strong rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none min-w-[200px] max-w-[280px] ${
+                  star.x > 50 ? "right-8" : "left-8"
+                } ${star.y > 40 ? "bottom-4" : "top-4"}`}
+                initial={{ scale: 0.8 }}
+              >
+                <Quote className="w-4 h-4 text-primary mb-2" />
+                <p className="text-foreground text-sm leading-relaxed mb-2">
+                  "{quotes[star.quoteIndex].text}"
+                </p>
+                <p className="text-xs text-muted-foreground">— {quotes[star.quoteIndex].author}</p>
+              </motion.div>
+            )}
           </motion.div>
         ))}
+
+        {/* Cancer label */}
+        <motion.div
+          className="absolute glass px-4 py-2 rounded-full"
+          style={{ left: "50%", top: "62%", transform: "translate(-50%, 0)" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-primary font-syne font-bold text-sm md:text-base">Cancer ♋</span>
+        </motion.div>
+
+        {/* Instruction text */}
+        <motion.p
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-muted-foreground text-xs md:text-sm text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          viewport={{ once: true }}
+        >
+          Hover over the stars to reveal wisdom ✨
+        </motion.p>
       </div>
 
       {/* Mobile Quotes List */}
       <div className="md:hidden container mx-auto px-4 mt-8">
         <div className="space-y-4">
-          {quotes.slice(0, 4).map((quote, index) => (
+          {quotes.map((quote, index) => (
             <motion.div
               key={quote.id}
               className="glass-strong rounded-xl p-4"

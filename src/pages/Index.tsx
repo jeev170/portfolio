@@ -10,6 +10,7 @@ import { CreativeLab } from "@/components/CreativeLab";
 import { Quotes } from "@/components/Quotes";
 import { Connect } from "@/components/Connect";
 import { Footer } from "@/components/Footer";
+import { Currently } from "@/components/Currently";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <Currently />
         <Projects />
         <Photography />
         <Blog />
