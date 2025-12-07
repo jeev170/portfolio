@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Trash2, Save, Star } from "lucide-react";
+import { Trash2, Download, Star } from "lucide-react";
 
 interface ConstellationStar {
   id: number;
@@ -61,6 +61,74 @@ export const CreativeLab = () => {
     setSavedConstellations(prev => prev.filter(c => c.id !== id));
   };
 
+  // Download constellation as PNG
+  const downloadConstellation = () => {
+    if (stars.length < 2 || !constellationName.trim()) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = 800;
+    canvas.height = 500;
+
+    // Background
+    ctx.fillStyle = '#0a0a1a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw stars and lines
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.5)';
+    ctx.lineWidth = 2;
+
+    // Draw lines
+    if (stars.length >= 2) {
+      ctx.beginPath();
+      stars.forEach((star, index) => {
+        const px = (star.x / 100) * canvas.width;
+        const py = (star.y / 100) * canvas.height;
+        if (index === 0) {
+          ctx.moveTo(px, py);
+        } else {
+          ctx.lineTo(px, py);
+        }
+      });
+      ctx.stroke();
+    }
+
+    // Draw stars
+    stars.forEach((star) => {
+      const px = (star.x / 100) * canvas.width;
+      const py = (star.y / 100) * canvas.height;
+      
+      // Glow
+      const gradient = ctx.createRadialGradient(px, py, 0, px, py, 15);
+      gradient.addColorStop(0, 'rgba(139, 92, 246, 1)');
+      gradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(px, py, 15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Star center
+      ctx.fillStyle = '#8b5cf6';
+      ctx.beginPath();
+      ctx.arc(px, py, 6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Draw name
+    ctx.fillStyle = '#8b5cf6';
+    ctx.font = 'bold 24px Syne, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(constellationName, canvas.width / 2, canvas.height - 30);
+
+    // Download
+    const link = document.createElement('a');
+    link.download = `${constellationName.replace(/\s+/g, '-').toLowerCase()}-constellation.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  };
+
   // Generate SVG lines connecting stars in order
   const generateLines = () => {
     if (stars.length < 2) return null;
@@ -106,7 +174,7 @@ export const CreativeLab = () => {
             <span className="text-foreground">Lab</span>
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
-            Click to create your own constellation and name it
+            Create your own constellation — name it, save it, make it yours
           </p>
         </motion.div>
 
@@ -133,8 +201,19 @@ export const CreativeLab = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Save className="w-4 h-4" />
+            <Star className="w-4 h-4" />
             Save
+          </motion.button>
+
+          <motion.button
+            onClick={downloadConstellation}
+            disabled={stars.length < 2 || !constellationName.trim()}
+            className="glass px-4 py-2 rounded-full text-sm font-medium flex items-center justify-center gap-2 hover:bg-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Download className="w-4 h-4" />
+            Download
           </motion.button>
 
           <motion.button
@@ -232,7 +311,7 @@ export const CreativeLab = () => {
             transition={{ delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Click anywhere to place stars. Connect at least 2 stars and name your constellation to save it.
+            Click anywhere to place stars. Connect at least 2 stars and name your constellation to save or download it.
           </motion.p>
         </motion.div>
 

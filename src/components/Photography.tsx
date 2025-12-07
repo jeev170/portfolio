@@ -53,18 +53,18 @@ export const Photography = () => {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  // Auto-scroll effect for row 2 (right to left)
+  // Auto-scroll effect for row 2 (left to right, slightly slower)
   useEffect(() => {
     const container = scrollContainerRef2.current;
     if (!container) return;
 
     let animationId: number;
-    let scrollPosition = container.scrollWidth / 2;
+    let scrollPosition = 0;
 
     const autoScroll = () => {
-      scrollPosition -= 0.3;
-      if (scrollPosition <= 0) {
-        scrollPosition = container.scrollWidth / 2;
+      scrollPosition += 0.35;
+      if (scrollPosition >= container.scrollWidth / 2) {
+        scrollPosition = 0;
       }
       container.scrollLeft = scrollPosition;
       animationId = requestAnimationFrame(autoScroll);
@@ -88,6 +88,10 @@ export const Photography = () => {
     setSelectedPhoto(photos[newIdx]);
   };
 
+  // Uniform card size for both rows
+  const cardWidth = "w-56 md:w-72";
+  const cardHeight = "h-72 md:h-80";
+
   return (
     <section id="photos" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
@@ -109,7 +113,7 @@ export const Photography = () => {
             <span className="text-foreground">Gallery</span>
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
-            Infinite moments captured across dimensions
+            Moments frozen in time, drifting through space
           </p>
         </motion.div>
 
@@ -125,7 +129,7 @@ export const Photography = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               onClick={() => setSelectedPhoto(photo)}
             >
-              <div className="relative w-48 h-64 md:w-64 md:h-80 rounded-xl md:rounded-2xl overflow-hidden glass-strong">
+              <div className={`relative ${cardWidth} ${cardHeight} rounded-xl md:rounded-2xl overflow-hidden glass-strong`}>
                 {/* Gradient placeholder */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
                 
@@ -145,7 +149,7 @@ export const Photography = () => {
           ))}
         </div>
 
-        {/* Row 2 - Scrolls right to left (offset photos) */}
+        {/* Row 2 - Also scrolls left to right (offset photos, same size) */}
         <div
           ref={scrollContainerRef2}
           className="flex gap-4 md:gap-6 overflow-hidden py-4"
@@ -157,11 +161,12 @@ export const Photography = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               onClick={() => setSelectedPhoto(photo)}
             >
-              <div className="relative w-40 h-52 md:w-48 md:h-64 rounded-xl md:rounded-2xl overflow-hidden glass-strong">
+              <div className={`relative ${cardWidth} ${cardHeight} rounded-xl md:rounded-2xl overflow-hidden glass-strong`}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
                 <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all" />
-                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 bg-gradient-to-t from-background/80 to-transparent">
-                  <h3 className="font-syne font-bold text-xs md:text-sm">{photo.title}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-background/80 to-transparent">
+                  <h3 className="font-syne font-bold text-sm md:text-lg">{photo.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm truncate">{photo.description}</p>
                 </div>
                 <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-40 blur-xl transition-opacity -z-10`} />
               </div>

@@ -14,8 +14,8 @@ const satellites = [
 ];
 
 export const Hero = () => {
-  const orbitRadius = 120;
-  const orbitRadiusMobile = 90;
+  const orbitRadius = 160; // Bigger orbit for desktop
+  const orbitRadiusMobile = 110; // Bigger orbit for mobile
 
   return (
     <section
@@ -43,17 +43,32 @@ export const Hero = () => {
         >
           {/* Orbit Path */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[200px] h-[200px] md:w-[280px] md:h-[280px] rounded-full border border-primary/20 animate-spin-slow" />
+            <div 
+              className="rounded-full border border-primary/20 animate-spin-slow"
+              style={{
+                width: `${orbitRadiusMobile * 2 + 40}px`,
+                height: `${orbitRadiusMobile * 2 + 40}px`,
+              }}
+            />
+          </div>
+          <div className="hidden md:block absolute inset-0 flex items-center justify-center">
+            <div 
+              className="rounded-full border border-primary/20 animate-spin-slow"
+              style={{
+                width: `${orbitRadius * 2 + 60}px`,
+                height: `${orbitRadius * 2 + 60}px`,
+              }}
+            />
           </div>
 
           {/* Planet Glow */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-28 h-28 md:w-40 md:h-40 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
+            <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
           </div>
 
           {/* Planet */}
           <motion.div
-            className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
+            className="relative w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
             style={{
               boxShadow: "0 0 80px hsl(var(--cosmic-purple) / 0.5), inset -10px -10px 30px hsl(var(--cosmic-pink) / 0.3)",
             }}
@@ -61,8 +76,8 @@ export const Hero = () => {
           >
             {/* Planet Surface Details */}
             <div className="absolute inset-2 rounded-full bg-gradient-to-br from-cosmic-purple/30 to-transparent" />
-            <div className="absolute top-4 left-6 w-6 md:w-8 h-3 md:h-4 rounded-full bg-cosmic-pink/20 blur-sm" />
-            <div className="absolute bottom-6 right-4 w-4 md:w-6 h-2 md:h-3 rounded-full bg-cosmic-blue/20 blur-sm" />
+            <div className="absolute top-4 left-6 w-8 h-4 rounded-full bg-cosmic-pink/20 blur-sm" />
+            <div className="absolute bottom-6 right-4 w-6 h-3 rounded-full bg-cosmic-blue/20 blur-sm" />
           </motion.div>
 
           {/* Satellites */}
@@ -81,31 +96,31 @@ export const Hero = () => {
                   rotate: 360,
                 }}
                 transition={{
-                  duration: 30,
+                  duration: 40, // Slower rotation
                   repeat: Infinity,
                   ease: "linear",
-                  delay: satellite.delay * 30,
+                  delay: satellite.delay * 40,
                 }}
                 style={{ transformOrigin: "center center" }}
               >
                 <motion.div
-                  className="absolute glass-strong rounded-full p-2 md:p-2.5 cursor-pointer group"
+                  className="absolute glass-strong rounded-full p-2.5 md:p-3 cursor-pointer group"
                   style={{
                     transform: `translateX(${orbitRadiusMobile}px)`,
                   }}
-                  whileHover={{ scale: 1.3 }}
+                  whileHover={{ scale: 1.4 }}
                   animate={{
                     rotate: -360,
                   }}
                   transition={{
-                    duration: 30,
+                    duration: 40,
                     repeat: Infinity,
                     ease: "linear",
-                    delay: satellite.delay * 30,
+                    delay: satellite.delay * 40,
                   }}
                 >
-                  <satellite.icon className="w-3 h-3 md:w-4 md:h-4 text-primary group-hover:text-cosmic-pink transition-colors" />
-                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] md:text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <satellite.icon className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:text-cosmic-pink transition-colors" />
+                  <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium">
                     {satellite.label}
                   </span>
                   {/* Glow effect on hover */}
@@ -118,18 +133,18 @@ export const Hero = () => {
 
         {/* Hero Text */}
         <motion.div
-          className="mt-16 md:mt-20 text-center px-4"
+          className="mt-20 md:mt-28 text-center px-4"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h1 className="font-syne text-4xl md:text-7xl font-bold mb-4 md:mb-6">
-            <span className="text-gradient">Hi, I'm</span>
+          <h1 className="font-display text-5xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight">
+            <span className="text-gradient">Hey, I'm</span>
             <br />
-            <span className="text-foreground">Jeevietha</span>
+            <span className="text-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>Jeevietha</span>
           </h1>
-          <p className="text-muted-foreground text-base md:text-xl max-w-md mx-auto mb-6 md:mb-8">
-            A cosmic journey through creativity, code, and visual storytelling
+          <p className="text-muted-foreground text-base md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed">
+            Exploring the intersection of creativity, code, and curiosity — one project at a time.
           </p>
 
           <motion.a
@@ -138,7 +153,7 @@ export const Hero = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Begin Journey</span>
+            <span>Let's explore</span>
             <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
           </motion.a>
         </motion.div>
