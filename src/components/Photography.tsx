@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 
-// Generate more photos for infinite gallery effect
+// Generate photos for gallery
 const generatePhotos = () => {
   const basePhotos = [
     { title: "Cosmic Dawn", description: "A sunrise through the nebula clouds", gradient: "from-cosmic-purple to-cosmic-pink" },
@@ -29,18 +29,10 @@ const photos = generatePhotos();
 
 export const Photography = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef2 = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const parallaxX = useTransform(scrollYProgress, [0, 1], [0, -200]);
-
-  // Auto-scroll effect
+  // Auto-scroll effect for row 1 (left to right)
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -58,7 +50,27 @@ export const Photography = () => {
     };
 
     animationId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
+  // Auto-scroll effect for row 2 (right to left)
+  useEffect(() => {
+    const container = scrollContainerRef2.current;
+    if (!container) return;
+
+    let animationId: number;
+    let scrollPosition = container.scrollWidth / 2;
+
+    const autoScroll = () => {
+      scrollPosition -= 0.3;
+      if (scrollPosition <= 0) {
+        scrollPosition = container.scrollWidth / 2;
+      }
+      container.scrollLeft = scrollPosition;
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
+    animationId = requestAnimationFrame(autoScroll);
     return () => cancelAnimationFrame(animationId);
   }, []);
 
@@ -77,7 +89,7 @@ export const Photography = () => {
   };
 
   return (
-    <section id="photos" ref={sectionRef} className="relative py-32 overflow-hidden">
+    <section id="photos" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px]" />
@@ -86,118 +98,75 @@ export const Photography = () => {
       <div className="relative z-10">
         {/* Section Title */}
         <motion.div
-          className="container mx-auto px-6 text-center mb-16"
+          className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-syne text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="font-syne text-3xl md:text-6xl font-bold mb-4">
             <span className="text-gradient">Photo</span>{" "}
             <span className="text-foreground">Gallery</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-md mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
             Infinite moments captured across dimensions
           </p>
         </motion.div>
 
-        {/* Infinite Horizontal Gallery */}
-        <div className="relative">
-          {/* Row 1 - Scrolls right */}
-          <motion.div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-hidden py-4 mb-6"
-            style={{ x: parallaxX }}
-          >
-            {/* Duplicate photos for infinite scroll effect */}
-            {[...photos, ...photos].map((photo, index) => (
-              <motion.div
-                key={`${photo.id}-${index}`}
-                className="flex-shrink-0 cursor-pointer group"
-                whileHover={{ scale: 1.05, y: -10 }}
-                onClick={() => setSelectedPhoto(photo)}
-              >
-                <div className="relative w-64 h-80 rounded-2xl overflow-hidden glass-strong">
-                  {/* Gradient placeholder */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all" />
-                  
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
-                    <h3 className="font-syne font-bold text-lg">{photo.title}</h3>
-                    <p className="text-muted-foreground text-sm truncate">{photo.description}</p>
-                  </div>
-
-                  {/* Hover glow */}
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-40 blur-xl transition-opacity -z-10`} />
+        {/* Row 1 - Scrolls left to right */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 md:gap-6 overflow-hidden py-4 mb-4 md:mb-6"
+        >
+          {[...photos, ...photos].map((photo, index) => (
+            <motion.div
+              key={`row1-${photo.id}-${index}`}
+              className="flex-shrink-0 cursor-pointer group"
+              whileHover={{ scale: 1.05, y: -5 }}
+              onClick={() => setSelectedPhoto(photo)}
+            >
+              <div className="relative w-48 h-64 md:w-64 md:h-80 rounded-xl md:rounded-2xl overflow-hidden glass-strong">
+                {/* Gradient placeholder */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all" />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-background/80 to-transparent">
+                  <h3 className="font-syne font-bold text-sm md:text-lg">{photo.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm truncate">{photo.description}</p>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Row 2 - Different photos, offset */}
-          <motion.div
-            className="flex gap-6 overflow-hidden py-4"
-            style={{ x: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-          >
-            {[...photos.slice(6), ...photos.slice(0, 6), ...photos.slice(6), ...photos.slice(0, 6)].map((photo, index) => (
-              <motion.div
-                key={`row2-${photo.id}-${index}`}
-                className="flex-shrink-0 cursor-pointer group"
-                whileHover={{ scale: 1.05, y: -10 }}
-                onClick={() => setSelectedPhoto(photo)}
-              >
-                <div className="relative w-48 h-64 rounded-2xl overflow-hidden glass-strong">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
-                  <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-background/80 to-transparent">
-                    <h3 className="font-syne font-bold text-sm">{photo.title}</h3>
-                  </div>
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-40 blur-xl transition-opacity -z-10`} />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                {/* Hover glow */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-40 blur-xl transition-opacity -z-10`} />
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Masonry-style Grid */}
-        <div className="container mx-auto px-6 mt-16">
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {photos.slice(0, 8).map((photo, index) => (
-              <motion.div
-                key={photo.id}
-                className={`cursor-pointer group ${
-                  index === 0 || index === 5 ? "row-span-2" : ""
-                }`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                onClick={() => setSelectedPhoto(photo)}
-              >
-                <div className={`relative w-full rounded-2xl overflow-hidden glass-strong ${
-                  index === 0 || index === 5 ? "h-[420px]" : "h-[200px]"
-                }`}>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
-                  <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-all" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
-                    <h3 className="font-syne font-bold">{photo.title}</h3>
-                    <p className="text-muted-foreground text-sm truncate">{photo.description}</p>
-                  </div>
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity -z-10`} />
+        {/* Row 2 - Scrolls right to left (offset photos) */}
+        <div
+          ref={scrollContainerRef2}
+          className="flex gap-4 md:gap-6 overflow-hidden py-4"
+        >
+          {[...photos.slice(6), ...photos.slice(0, 6), ...photos.slice(6), ...photos.slice(0, 6)].map((photo, index) => (
+            <motion.div
+              key={`row2-${photo.id}-${index}`}
+              className="flex-shrink-0 cursor-pointer group"
+              whileHover={{ scale: 1.05, y: -5 }}
+              onClick={() => setSelectedPhoto(photo)}
+            >
+              <div className="relative w-40 h-52 md:w-48 md:h-64 rounded-xl md:rounded-2xl overflow-hidden glass-strong">
+                <div className={`absolute inset-0 bg-gradient-to-br ${photo.gradient}`} />
+                <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-all" />
+                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 bg-gradient-to-t from-background/80 to-transparent">
+                  <h3 className="font-syne font-bold text-xs md:text-sm">{photo.title}</h3>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-40 blur-xl transition-opacity -z-10`} />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -205,7 +174,7 @@ export const Photography = () => {
       <AnimatePresence>
         {selectedPhoto && (
           <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-2xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-2xl p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -213,25 +182,25 @@ export const Photography = () => {
           >
             {/* Navigation Arrows */}
             <motion.button
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 glass p-3 rounded-full hover:bg-primary/20 transition-all z-10"
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 glass p-2 md:p-3 rounded-full hover:bg-primary/20 transition-all z-10"
               onClick={(e) => { e.stopPropagation(); navigatePhoto("prev"); }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </motion.button>
 
             <motion.button
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 glass p-3 rounded-full hover:bg-primary/20 transition-all z-10"
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 glass p-2 md:p-3 rounded-full hover:bg-primary/20 transition-all z-10"
               onClick={(e) => { e.stopPropagation(); navigatePhoto("next"); }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </motion.button>
 
             <motion.div
-              className="relative max-w-4xl w-full mx-4"
+              className="relative max-w-4xl w-full"
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -240,39 +209,39 @@ export const Photography = () => {
             >
               {/* Close button */}
               <button
-                className="absolute -top-14 right-0 glass p-2 rounded-full hover:bg-primary/20 transition-all"
+                className="absolute -top-12 md:-top-14 right-0 glass p-2 rounded-full hover:bg-primary/20 transition-all"
                 onClick={() => setSelectedPhoto(null)}
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 md:w-6 md:h-6" />
               </button>
 
               {/* Photo */}
-              <div className="glass-strong rounded-3xl overflow-hidden">
-                <div className={`w-full aspect-[16/10] bg-gradient-to-br ${selectedPhoto.gradient}`} />
+              <div className="glass-strong rounded-2xl md:rounded-3xl overflow-hidden">
+                <div className={`w-full aspect-[4/3] md:aspect-[16/10] bg-gradient-to-br ${selectedPhoto.gradient}`} />
               </div>
 
               {/* Info */}
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-4 md:mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-syne text-3xl font-bold mb-2">
+                  <h3 className="font-syne text-xl md:text-3xl font-bold mb-1 md:mb-2">
                     {selectedPhoto.title}
                   </h3>
-                  <p className="text-muted-foreground text-lg">
+                  <p className="text-muted-foreground text-sm md:text-lg">
                     {selectedPhoto.description}
                   </p>
                 </div>
                 <motion.button
-                  className="glass px-6 py-3 rounded-full inline-flex items-center gap-2 hover:bg-primary/20 transition-all"
+                  className="glass px-4 md:px-6 py-2 md:py-3 rounded-full inline-flex items-center gap-2 hover:bg-primary/20 transition-all text-sm md:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Heart className="w-5 h-5" />
+                  <Heart className="w-4 h-4 md:w-5 md:h-5" />
                   <span>Like</span>
                 </motion.button>
               </div>
 
               {/* Photo counter */}
-              <p className="text-center text-muted-foreground text-sm mt-4">
+              <p className="text-center text-muted-foreground text-xs md:text-sm mt-4">
                 {photos.findIndex(p => p.id === selectedPhoto.id) + 1} / {photos.length}
               </p>
             </motion.div>
