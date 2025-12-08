@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, Hammer, Compass } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const currentlyItems = [
   {
@@ -25,11 +26,43 @@ const currentlyItems = [
   },
 ];
 
+// Rotating nebula texture component
+const RotatingNebula = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <motion.div
+        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] md:w-[1200px] md:h-[1200px]"
+        style={{
+          background: `
+            radial-gradient(ellipse at 30% 40%, hsl(var(--cosmic-purple) / 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 70% 60%, hsl(var(--cosmic-pink) / 0.06) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, hsl(var(--cosmic-blue) / 0.04) 0%, transparent 60%)
+          `,
+          filter: "blur(60px)",
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          duration: 120,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+    </div>
+  );
+};
+
 export const Currently = () => {
   return (
     <section id="currently" className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+      {/* Rotating Nebula Background */}
+      <RotatingNebula />
+
+      {/* Static Background Glows */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px]" />
       </div>
@@ -63,14 +96,36 @@ export const Currently = () => {
               viewport={{ once: true }}
             >
               <motion.div
-                className={`glass-strong rounded-2xl md:rounded-3xl p-6 md:p-8 h-full bg-gradient-to-br ${item.gradient} group`}
+                className={`relative glass-strong rounded-2xl md:rounded-3xl p-6 md:p-8 h-full bg-gradient-to-br ${item.gradient} group overflow-hidden`}
                 whileHover={{ scale: 1.03, y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                {/* Icon */}
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl glass flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors">
+                {/* Hover Glow Outline */}
+                <div className="absolute inset-0 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(var(--cosmic-purple) / 0.4), hsl(var(--cosmic-pink) / 0.4), hsl(var(--cosmic-blue) / 0.4))",
+                    padding: "1px",
+                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    maskComposite: "xor",
+                    WebkitMaskComposite: "xor",
+                  }}
+                />
+
+                {/* Icon with Breathe Effect */}
+                <motion.div 
+                  className="w-12 h-12 md:w-14 md:h-14 rounded-xl glass flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.3,
+                  }}
+                >
                   <item.icon className="w-6 h-6 md:w-7 md:h-7 text-primary" />
-                </div>
+                </motion.div>
 
                 {/* Label */}
                 <span className="inline-block glass px-3 py-1 rounded-full text-xs font-medium text-primary mb-3 md:mb-4">

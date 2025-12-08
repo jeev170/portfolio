@@ -75,6 +75,13 @@
 
   html {
     scroll-behavior: smooth;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      cursor: auto;
+    }
   }
 
   body {
@@ -84,6 +91,13 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', sans-serif;
+  }
+
+  /* Hide default cursor on interactive elements for custom cursor */
+  @media (min-width: 769px) {
+    a, button, [role="button"], input, textarea, select {
+      cursor: none;
+    }
   }
 }
 
