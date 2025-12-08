@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { Rocket, Camera, BookOpen, User, Sparkles, Quote, Mail, Code2, FlaskConical } from "lucide-react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import cosmicBg from "@/assets/cosmic-bg.jpg";
 
 const satellites = [
@@ -55,55 +55,51 @@ const ParticleBurst = ({ isActive }: { isActive: boolean }) => {
 };
 
 export const Hero = () => {
-  const orbitRadius = 180; // Bigger orbit for desktop
-  const orbitRadiusMobile = 120; // Bigger orbit for mobile
+  const orbitRadius = 140; // Tighter orbit for desktop
+  const orbitRadiusMobile = 100; // Tighter orbit for mobile
   const [buttonHovered, setButtonHovered] = useState(false);
 
-  // Create organic floating motion for satellites
+  // Clean circular orbit motion for satellites
   const useSatellitePosition = (index: number) => {
     const time = useMotionValue(0);
     const baseAngle = (index / satellites.length) * 360;
     
     useEffect(() => {
       const controls = animate(time, 360, {
-        duration: 50 + index * 3,
+        duration: 40, // Uniform speed for all
         repeat: Infinity,
         ease: "linear",
       });
       return controls.stop;
-    }, [time, index]);
+    }, [time]);
 
-    // Create organic wobble
-    const wobbleX = useTransform(time, (t) => {
+    // Clean circular motion without wobble
+    const posX = useTransform(time, (t) => {
       const angle = ((baseAngle + t) * Math.PI) / 180;
-      const wobble = Math.sin(t * 0.05 + index) * 8;
-      return Math.cos(angle) * (orbitRadius + wobble);
+      return Math.cos(angle) * orbitRadius;
     });
     
-    const wobbleY = useTransform(time, (t) => {
+    const posY = useTransform(time, (t) => {
       const angle = ((baseAngle + t) * Math.PI) / 180;
-      const wobble = Math.cos(t * 0.07 + index * 0.5) * 6;
-      return Math.sin(angle) * (orbitRadius + wobble);
+      return Math.sin(angle) * orbitRadius;
     });
 
-    const wobbleXMobile = useTransform(time, (t) => {
+    const posXMobile = useTransform(time, (t) => {
       const angle = ((baseAngle + t) * Math.PI) / 180;
-      const wobble = Math.sin(t * 0.05 + index) * 5;
-      return Math.cos(angle) * (orbitRadiusMobile + wobble);
+      return Math.cos(angle) * orbitRadiusMobile;
     });
     
-    const wobbleYMobile = useTransform(time, (t) => {
+    const posYMobile = useTransform(time, (t) => {
       const angle = ((baseAngle + t) * Math.PI) / 180;
-      const wobble = Math.cos(t * 0.07 + index * 0.5) * 4;
-      return Math.sin(angle) * (orbitRadiusMobile + wobble);
+      return Math.sin(angle) * orbitRadiusMobile;
     });
 
-    return { wobbleX, wobbleY, wobbleXMobile, wobbleYMobile };
+    return { posX, posY, posXMobile, posYMobile };
   };
 
-  // Satellite component with organic motion
+  // Satellite component with clean circular motion
   const Satellite = ({ satellite, index }: { satellite: typeof satellites[0]; index: number }) => {
-    const { wobbleX, wobbleY, wobbleXMobile, wobbleYMobile } = useSatellitePosition(index);
+    const { posX, posY, posXMobile, posYMobile } = useSatellitePosition(index);
 
     return (
       <motion.a
@@ -117,8 +113,8 @@ export const Hero = () => {
         <motion.div
           className="hidden md:block absolute glass-strong rounded-full p-3 cursor-pointer"
           style={{
-            x: wobbleX,
-            y: wobbleY,
+            x: posX,
+            y: posY,
             translateX: "-50%",
             translateY: "-50%",
           }}
@@ -135,8 +131,8 @@ export const Hero = () => {
         <motion.div
           className="md:hidden absolute glass-strong rounded-full p-2.5 cursor-pointer"
           style={{
-            x: wobbleXMobile,
-            y: wobbleYMobile,
+            x: posXMobile,
+            y: posYMobile,
             translateX: "-50%",
             translateY: "-50%",
           }}
@@ -173,10 +169,10 @@ export const Hero = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          {/* Orbit Path - dashed for organic feel */}
+          {/* Orbit Path - solid for clean look */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div 
-              className="rounded-full border border-dashed border-primary/15"
+              className="rounded-full border border-primary/20"
               style={{
                 width: `${orbitRadiusMobile * 2 + 20}px`,
                 height: `${orbitRadiusMobile * 2 + 20}px`,
@@ -185,7 +181,7 @@ export const Hero = () => {
           </div>
           <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
             <div 
-              className="rounded-full border border-dashed border-primary/15"
+              className="rounded-full border border-primary/20"
               style={{
                 width: `${orbitRadius * 2 + 30}px`,
                 height: `${orbitRadius * 2 + 30}px`,
@@ -195,12 +191,12 @@ export const Hero = () => {
 
           {/* Planet Glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
+            <div className="w-44 h-44 md:w-60 md:h-60 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
           </div>
 
           {/* Planet - BIGGER */}
           <motion.div
-            className="relative w-36 h-36 md:w-48 md:h-48 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
+            className="relative w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
             style={{
               boxShadow: "0 0 100px hsl(var(--cosmic-purple) / 0.5), inset -12px -12px 40px hsl(var(--cosmic-pink) / 0.3)",
             }}
@@ -212,7 +208,7 @@ export const Hero = () => {
             <div className="absolute bottom-8 right-6 w-8 h-4 rounded-full bg-cosmic-blue/20 blur-sm" />
           </motion.div>
 
-          {/* Satellites with organic movement */}
+          {/* Satellites with clean circular movement */}
           {satellites.map((satellite, index) => (
             <Satellite key={satellite.label} satellite={satellite} index={index} />
           ))}
@@ -263,12 +259,12 @@ export const Hero = () => {
             />
           </div>
 
-          <h1 className="font-display text-5xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight relative z-10">
-            <span className="text-gradient">Hey, I'm</span>
+          <h1 className="text-5xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight relative z-10">
+            <span className="text-gradient font-body">Hey, I'm</span>
             <br />
-            <span className="text-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>Jeevietha</span>
+            <span className="text-foreground" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500, letterSpacing: "-0.02em" }}>Jeevietha</span>
           </h1>
-          <p className="text-muted-foreground text-base md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed relative z-10">
+          <p className="text-muted-foreground text-base md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed relative z-10 font-body">
             Exploring the intersection of creativity, code, and curiosity — one project at a time.
           </p>
 
