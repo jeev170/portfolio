@@ -27,10 +27,11 @@ export const Footer = () => {
         >
           {/* Logo */}
           <motion.h3
-            className="font-syne text-3xl font-bold text-gradient text-center mb-8"
+            className="text-3xl font-bold text-gradient text-center mb-8"
+            style={{ fontFamily: "'Playfair Display', serif" }}
             whileHover={{ scale: 1.05 }}
           >
-            Dreamscape
+            Jeevietha
           </motion.h3>
 
           {/* Navigation Links */}
@@ -55,13 +56,10 @@ export const Footer = () => {
           <div className="w-32 h-px bg-gradient-cosmic mx-auto mb-8 opacity-50" />
 
           {/* Copyright */}
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2 mb-2">
+          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
             Made with{" "}
             <Heart className="w-4 h-4 text-cosmic-pink fill-cosmic-pink animate-pulse" />{" "}
             in the cosmos
-          </p>
-          <p className="text-xs text-muted-foreground/60 text-center">
-            © 2024 Dreamscape. All rights reserved.
           </p>
         </motion.div>
       </div>

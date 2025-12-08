@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion, useSpring } from "framer-motion";
 
 export const CosmicCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
   const springConfig = { damping: 25, stiffness: 300 };
@@ -14,7 +13,6 @@ export const CosmicCursor = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       trailX.set(e.clientX);
@@ -42,7 +40,7 @@ export const CosmicCursor = () => {
 
   return (
     <>
-      {/* Outer glow trail */}
+      {/* Soft trailing glow */}
       <motion.div
         className="fixed pointer-events-none z-[9999] mix-blend-screen hidden md:block"
         style={{
@@ -53,15 +51,15 @@ export const CosmicCursor = () => {
         }}
       >
         <div
-          className="w-12 h-12 rounded-full opacity-30"
+          className="w-10 h-10 rounded-full opacity-40"
           style={{
-            background: "radial-gradient(circle, hsl(var(--cosmic-purple)) 0%, hsl(var(--cosmic-pink) / 0.5) 40%, transparent 70%)",
-            filter: "blur(8px)",
+            background: "radial-gradient(circle, hsl(var(--cosmic-purple) / 0.6) 0%, hsl(var(--cosmic-pink) / 0.3) 50%, transparent 70%)",
+            filter: "blur(6px)",
           }}
         />
       </motion.div>
 
-      {/* Main cursor orb */}
+      {/* Glowing outer ring */}
       <motion.div
         className="fixed pointer-events-none z-[9999] hidden md:block"
         style={{
@@ -73,15 +71,16 @@ export const CosmicCursor = () => {
         }}
       >
         <div
-          className="w-5 h-5 rounded-full"
+          className="w-7 h-7 rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(var(--cosmic-pink)) 0%, hsl(var(--cosmic-purple)) 60%, transparent 100%)",
-            boxShadow: "0 0 20px hsl(var(--cosmic-purple) / 0.6), 0 0 40px hsl(var(--cosmic-pink) / 0.4)",
+            background: "transparent",
+            border: "2px solid hsl(var(--cosmic-purple) / 0.8)",
+            boxShadow: "0 0 15px hsl(var(--cosmic-purple) / 0.5), 0 0 30px hsl(var(--cosmic-pink) / 0.3), inset 0 0 10px hsl(var(--cosmic-purple) / 0.2)",
           }}
         />
       </motion.div>
 
-      {/* Inner bright core */}
+      {/* Black center core */}
       <motion.div
         className="fixed pointer-events-none z-[9999] hidden md:block"
         style={{
@@ -93,9 +92,9 @@ export const CosmicCursor = () => {
         }}
       >
         <div
-          className="w-2 h-2 rounded-full bg-foreground/80"
+          className="w-2.5 h-2.5 rounded-full bg-background"
           style={{
-            boxShadow: "0 0 10px hsl(var(--foreground) / 0.8)",
+            boxShadow: "0 0 4px hsl(var(--background))",
           }}
         />
       </motion.div>
