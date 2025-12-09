@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // GitHub Pages compatibility: use hash routing for SPA
-  base: "./",
+  // GitHub Pages compatibility: set base to repo name
+  base: "/portfolio/",
   server: {
     host: "::",
     port: 8080,
