@@ -262,7 +262,7 @@ export const Hero = () => {
           <h1 className="text-5xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight relative z-10">
             <span className="text-gradient font-body">Hey, I'm</span>
             <br />
-            <span className="text-foreground" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500, letterSpacing: "-0.02em" }}>Jeevietha</span>
+            <span className="text-foreground" style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, letterSpacing: "-0.01em" }}>Jeevietha</span>
           </h1>
           <p className="text-muted-foreground text-base md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed relative z-10 font-body">
             Exploring the intersection of creativity, code, and curiosity — one project at a time.
