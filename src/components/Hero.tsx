@@ -161,8 +161,8 @@ export const Hero = () => {
       </div>
 
       {/* Floating Planet with Satellites */}
-      <div className="relative z-10 flex flex-col items-center pt-16 md:pt-0">
-        {/* Planet Container */}
+      <div className="relative z-10 flex flex-col items-center pt-24 md:pt-20">
+        {/* Planet Container - lower z-index to stay below nav */}
         <motion.div
           className="relative"
           initial={{ scale: 0, opacity: 0 }}
