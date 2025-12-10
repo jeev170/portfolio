@@ -39,6 +39,24 @@ const projects = [
     thumbnail: "linear-gradient(135deg, hsl(258 90% 45%) 0%, hsl(330 85% 50%) 50%, hsl(280 85% 40%) 100%)",
     delay: 0.3,
   },
+  {
+    id: 5,
+    title: "Cosmic Chat",
+    description: "Real-time messaging platform with AI-powered translation and sentiment analysis.",
+    tags: ["Socket.io", "AI", "React"],
+    gradient: "from-cosmic-blue to-cosmic-cyan",
+    thumbnail: "linear-gradient(135deg, hsl(220 90% 40%) 0%, hsl(185 85% 45%) 50%, hsl(220 90% 30%) 100%)",
+    delay: 0.4,
+  },
+  {
+    id: 6,
+    title: "Starlight Portfolio",
+    description: "Animated portfolio template with cosmic theme and interactive 3D elements.",
+    tags: ["Framer Motion", "GSAP", "CSS"],
+    gradient: "from-cosmic-pink to-cosmic-cyan",
+    thumbnail: "linear-gradient(135deg, hsl(330 85% 40%) 0%, hsl(185 85% 50%) 50%, hsl(330 85% 30%) 100%)",
+    delay: 0.5,
+  },
 ];
 
 // Portal opening animation variants
@@ -64,7 +82,7 @@ const portalVariants = {
 
 export const Projects = () => {
   return (
-    <section id="projects" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="projects" className="relative py-12 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px]" />

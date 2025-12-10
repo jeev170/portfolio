@@ -11,19 +11,19 @@ const socialLinks = [
   { 
     icon: Github, 
     label: "GitHub", 
-    href: "#",
+    href: "https://github.com/jeev170",
     description: "Check my code"
   },
   { 
     icon: Linkedin, 
     label: "LinkedIn", 
-    href: "#",
+    href: "https://linkedin.com/in/jeevietha",
     description: "Let's connect"
   },
   { 
     icon: Instagram, 
     label: "Instagram", 
-    href: "#",
+    href: "https://instagram.com/jeevietha",
     description: "See my world"
   },
 ];
