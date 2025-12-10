@@ -161,7 +161,7 @@ export const Hero = () => {
       </div>
 
       {/* Floating Planet with Satellites */}
-      <div className="relative z-10 flex flex-col items-center pt-24 md:pt-20">
+      <div className="relative z-10 flex flex-col items-center pt-32 md:pt-28 lg:pt-24">
         {/* Planet Container - lower z-index to stay below nav */}
         <motion.div
           className="relative"
@@ -169,25 +169,7 @@ export const Hero = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          {/* Orbit Path - solid for clean look */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div 
-              className="rounded-full border border-primary/20"
-              style={{
-                width: `${orbitRadiusMobile * 2 + 20}px`,
-                height: `${orbitRadiusMobile * 2 + 20}px`,
-              }}
-            />
-          </div>
-          <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
-            <div 
-              className="rounded-full border border-primary/20"
-              style={{
-                width: `${orbitRadius * 2 + 30}px`,
-                height: `${orbitRadius * 2 + 30}px`,
-              }}
-            />
-          </div>
+          {/* Orbit paths removed as per user request */}
 
           {/* Planet Glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

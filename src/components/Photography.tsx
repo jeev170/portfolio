@@ -1,16 +1,20 @@
 import { motion } from "framer-motion";
+import { Upload, Plus } from "lucide-react";
 
-// Generate photos for gallery
+// Generate photos for gallery - placeholder images that can be replaced
 const photos = [
-  { id: 1, title: "Cosmic Dawn", gradient: "from-cosmic-purple to-cosmic-pink" },
-  { id: 2, title: "Ethereal Forest", gradient: "from-cosmic-blue to-cosmic-cyan" },
-  { id: 3, title: "Aurora Dreams", gradient: "from-cosmic-pink to-cosmic-purple" },
-  { id: 4, title: "Stellar Ocean", gradient: "from-cosmic-cyan to-cosmic-blue" },
-  { id: 5, title: "Mountain Whispers", gradient: "from-cosmic-purple to-cosmic-blue" },
-  { id: 6, title: "Desert Stars", gradient: "from-cosmic-pink to-cosmic-cyan" },
-  { id: 7, title: "Frozen Galaxy", gradient: "from-cosmic-blue to-cosmic-purple" },
-  { id: 8, title: "Cloud Kingdom", gradient: "from-cosmic-cyan to-cosmic-pink" },
+  { id: 1, title: "Cosmic Dawn", gradient: "from-cosmic-purple to-cosmic-pink", image: null },
+  { id: 2, title: "Ethereal Forest", gradient: "from-cosmic-blue to-cosmic-cyan", image: null },
+  { id: 3, title: "Aurora Dreams", gradient: "from-cosmic-pink to-cosmic-purple", image: null },
+  { id: 4, title: "Stellar Ocean", gradient: "from-cosmic-cyan to-cosmic-blue", image: null },
+  { id: 5, title: "Mountain Whispers", gradient: "from-cosmic-purple to-cosmic-blue", image: null },
+  { id: 6, title: "Desert Stars", gradient: "from-cosmic-pink to-cosmic-cyan", image: null },
+  { id: 7, title: "Frozen Galaxy", gradient: "from-cosmic-blue to-cosmic-purple", image: null },
+  { id: 8, title: "Cloud Kingdom", gradient: "from-cosmic-cyan to-cosmic-pink", image: null },
 ];
+
+// Upload placeholder card
+const uploadPlaceholder = { id: "upload", title: "Add Photo", isUpload: true };
 
 // Duplicate for seamless loop
 const row1Photos = [...photos, ...photos];
@@ -18,7 +22,7 @@ const row2Photos = [...photos.reverse(), ...photos.reverse()];
 
 export const Photography = () => {
   return (
-    <section id="photos" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="photos" className="relative py-16 md:py-24 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px]" />
@@ -40,6 +44,27 @@ export const Photography = () => {
           <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
             Moments frozen in time, drifting through space
           </p>
+        </motion.div>
+
+        {/* Upload Placeholder */}
+        <motion.div
+          className="flex justify-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="w-48 h-36 md:w-64 md:h-48 rounded-xl md:rounded-2xl glass-strong border-2 border-dashed border-primary/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/60 hover:bg-primary/5 transition-all group"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full glass flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
+              <Upload className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            </div>
+            <p className="text-muted-foreground text-sm font-medium">Upload Photos</p>
+            <p className="text-muted-foreground/60 text-xs mt-1">Click to add images</p>
+          </motion.div>
         </motion.div>
 
         {/* Scrolling Rows */}

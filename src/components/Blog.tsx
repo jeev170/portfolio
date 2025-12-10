@@ -50,28 +50,6 @@ const experiences = [
     gradient: "from-cosmic-cyan/30 to-cosmic-blue/30",
     icon: MapPin,
   },
-  {
-    id: 5,
-    type: "story",
-    title: "The Project That Changed Everything",
-    excerpt: "How a failed side project taught me more about product design than any successful launch ever did.",
-    fullContent: "I spent six months building an app nobody wanted. It hurt. But that failure forced me to actually talk to users before building. Now I prototype in conversations before I prototype in code. The app never launched, but the lesson shaped every successful project since. Fail fast, learn faster.",
-    date: "Jul 05, 2024",
-    readTime: "10 min",
-    gradient: "from-cosmic-purple/30 to-cosmic-blue/30",
-    icon: Sparkles,
-  },
-  {
-    id: 6,
-    type: "learning",
-    title: "Finding My Creative Voice",
-    excerpt: "The journey from copying others' styles to developing a unique aesthetic that feels authentically mine.",
-    fullContent: "For years, I tried to design like the people I admired. Everything felt like a pale imitation. The breakthrough came when I started designing for an audience of one: myself. When I stopped worrying about trends and started following my weird instincts, my work finally felt authentic. Originality isn't about being different—it's about being honest.",
-    date: "Jun 12, 2024",
-    readTime: "9 min",
-    gradient: "from-cosmic-pink/30 to-cosmic-cyan/30",
-    icon: Heart,
-  },
 ];
 
 export const Blog = () => {
