@@ -2,15 +2,22 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Photos", href: "#photos" },
-  { name: "Blog", href: "#blog" },
-  { name: "Skills", href: "#skills" },
-  { name: "Lab", href: "#lab" },
-  { name: "Quotes", href: "#quotes" },
+  { name: "Home", sectionId: "home" },
+  { name: "About", sectionId: "about" },
+  { name: "Projects", sectionId: "projects" },
+  { name: "Photos", sectionId: "photos" },
+  { name: "Blog", sectionId: "blog" },
+  { name: "Skills", sectionId: "skills" },
+  { name: "Lab", sectionId: "lab" },
+  { name: "Quotes", sectionId: "quotes" },
 ];
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export const Footer = () => {
   return (
@@ -26,21 +33,22 @@ export const Footer = () => {
           viewport={{ once: true }}
         >
           {/* Logo */}
-          <motion.h3
-            className="text-3xl font-bold text-gradient text-center mb-8"
+          <motion.button
+            onClick={() => scrollToSection("home")}
+            className="text-3xl font-bold text-gradient text-center mb-8 block mx-auto cursor-pointer"
             style={{ fontFamily: "'Playfair Display', serif" }}
             whileHover={{ scale: 1.05 }}
           >
             Jeevietha
-          </motion.h3>
+          </motion.button>
 
           {/* Navigation Links */}
           <div className="flex flex-wrap justify-center gap-6 mb-8">
             {navLinks.map((link, index) => (
-              <motion.a
+              <motion.button
                 key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                onClick={() => scrollToSection(link.sectionId)}
+                className="text-muted-foreground hover:text-foreground transition-colors text-sm cursor-pointer"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
@@ -48,7 +56,7 @@ export const Footer = () => {
                 whileHover={{ y: -2 }}
               >
                 {link.name}
-              </motion.a>
+              </motion.button>
             ))}
           </div>
 
