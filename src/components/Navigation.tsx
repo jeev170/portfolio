@@ -3,16 +3,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Photos", href: "#photos" },
-  { name: "Blog", href: "#blog" },
-  { name: "Skills", href: "#skills" },
-  { name: "Lab", href: "#lab" },
-  { name: "Quotes", href: "#quotes" },
-  { name: "Connect", href: "#connect" },
+  { name: "Home", sectionId: "home" },
+  { name: "About", sectionId: "about" },
+  { name: "Projects", sectionId: "projects" },
+  { name: "Photos", sectionId: "photos" },
+  { name: "Blog", sectionId: "blog" },
+  { name: "Skills", sectionId: "skills" },
+  { name: "Lab", sectionId: "lab" },
+  { name: "Quotes", sectionId: "quotes" },
+  { name: "Connect", sectionId: "connect" },
 ];
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,28 +44,28 @@ export const Navigation = () => {
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <motion.a
-            href="#home"
-            className="font-syne text-lg md:text-2xl font-bold text-gradient"
+          <motion.button
+            onClick={() => scrollToSection("home")}
+            className="font-syne text-lg md:text-2xl font-bold text-gradient cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
             Jeevietha
-          </motion.a>
+          </motion.button>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item.name}
-                href={item.href}
-                className="text-xs xl:text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
+                onClick={() => scrollToSection(item.sectionId)}
+                className="text-xs xl:text-sm text-muted-foreground hover:text-foreground transition-colors relative group cursor-pointer"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.05 }}
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-cosmic group-hover:w-full transition-all duration-300" />
-              </motion.a>
+              </motion.button>
             ))}
           </div>
 
@@ -72,14 +79,14 @@ export const Navigation = () => {
           </motion.button>
 
           {/* Desktop CTA */}
-          <motion.a
-            href="#connect"
-            className="hidden lg:flex glass px-4 xl:px-5 py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-primary/20 transition-all glow-primary"
+          <motion.button
+            onClick={() => scrollToSection("connect")}
+            className="hidden lg:flex glass px-4 xl:px-5 py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-primary/20 transition-all glow-primary cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Let's Connect
-          </motion.a>
+          </motion.button>
         </div>
       </motion.nav>
 
@@ -104,17 +111,19 @@ export const Navigation = () => {
             >
               <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2 px-2 rounded-lg hover:bg-primary/10"
+                    onClick={() => {
+                      scrollToSection(item.sectionId);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2 px-2 rounded-lg hover:bg-primary/10 text-left cursor-pointer"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.03 }}
-                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>

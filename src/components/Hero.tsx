@@ -4,15 +4,22 @@ import { useEffect, useState } from "react";
 import cosmicBg from "@/assets/cosmic-bg.jpg";
 
 const satellites = [
-  { icon: User, label: "About", href: "#about", delay: 0 },
-  { icon: Rocket, label: "Projects", href: "#projects", delay: 0.125 },
-  { icon: Camera, label: "Photos", href: "#photos", delay: 0.25 },
-  { icon: BookOpen, label: "Blog", href: "#blog", delay: 0.375 },
-  { icon: Code2, label: "Skills", href: "#skills", delay: 0.5 },
-  { icon: FlaskConical, label: "Lab", href: "#lab", delay: 0.625 },
-  { icon: Quote, label: "Quotes", href: "#quotes", delay: 0.75 },
-  { icon: Mail, label: "Connect", href: "#connect", delay: 0.875 },
+  { icon: User, label: "About", sectionId: "about", delay: 0 },
+  { icon: Rocket, label: "Projects", sectionId: "projects", delay: 0.125 },
+  { icon: Camera, label: "Photos", sectionId: "photos", delay: 0.25 },
+  { icon: BookOpen, label: "Blog", sectionId: "blog", delay: 0.375 },
+  { icon: Code2, label: "Skills", sectionId: "skills", delay: 0.5 },
+  { icon: FlaskConical, label: "Lab", sectionId: "lab", delay: 0.625 },
+  { icon: Quote, label: "Quotes", sectionId: "quotes", delay: 0.75 },
+  { icon: Mail, label: "Connect", sectionId: "connect", delay: 0.875 },
 ];
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 // Particle burst component
 const ParticleBurst = ({ isActive }: { isActive: boolean }) => {
@@ -102,8 +109,8 @@ export const Hero = () => {
     const { posX, posY, posXMobile, posYMobile } = useSatellitePosition(index);
 
     return (
-      <motion.a
-        href={satellite.href}
+      <motion.button
+        onClick={() => scrollToSection(satellite.sectionId)}
         className="absolute top-1/2 left-1/2 cursor-pointer group z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -141,7 +148,7 @@ export const Hero = () => {
           <satellite.icon className="w-4 h-4 text-primary group-hover:text-cosmic-pink transition-colors" />
           <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/20 transition-all blur-md" />
         </motion.div>
-      </motion.a>
+      </motion.button>
     );
   };
 
@@ -251,8 +258,8 @@ export const Hero = () => {
           </p>
 
           {/* Explore Button with Particle Burst */}
-          <motion.a
-            href="#about"
+          <motion.button
+            onClick={() => scrollToSection("about")}
             className="relative inline-flex items-center gap-2 glass px-6 md:px-8 py-3 md:py-4 rounded-full font-medium hover:bg-primary/20 transition-all glow-primary group text-sm md:text-base overflow-visible"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -262,7 +269,7 @@ export const Hero = () => {
             <ParticleBurst isActive={buttonHovered} />
             <span className="relative z-10">Let's explore</span>
             <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform relative z-10" />
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </section>
