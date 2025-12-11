@@ -62,8 +62,8 @@ const ParticleBurst = ({ isActive }: { isActive: boolean }) => {
 };
 
 export const Hero = () => {
-  const orbitRadius = 140; // Tighter orbit for desktop
-  const orbitRadiusMobile = 100; // Tighter orbit for mobile
+  const orbitRadius = 110; // Smaller orbit for desktop
+  const orbitRadiusMobile = 80; // Smaller orbit for mobile
   const [buttonHovered, setButtonHovered] = useState(false);
 
   // Clean circular orbit motion for satellites
@@ -73,14 +73,13 @@ export const Hero = () => {
     
     useEffect(() => {
       const controls = animate(time, 360, {
-        duration: 40, // Uniform speed for all
+        duration: 40,
         repeat: Infinity,
         ease: "linear",
       });
       return controls.stop;
     }, [time]);
 
-    // Clean circular motion without wobble
     const posX = useTransform(time, (t) => {
       const angle = ((baseAngle + t) * Math.PI) / 180;
       return Math.cos(angle) * orbitRadius;
@@ -118,7 +117,7 @@ export const Hero = () => {
       >
         {/* Desktop position */}
         <motion.div
-          className="hidden md:block absolute glass-strong rounded-full p-3 cursor-pointer"
+          className="hidden md:block absolute glass-strong rounded-full p-2.5 cursor-pointer"
           style={{
             x: posX,
             y: posY,
@@ -127,8 +126,8 @@ export const Hero = () => {
           }}
           whileHover={{ scale: 1.3 }}
         >
-          <satellite.icon className="w-5 h-5 text-primary group-hover:text-cosmic-pink transition-colors" />
-          <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium">
+          <satellite.icon className="w-4 h-4 text-primary group-hover:text-cosmic-pink transition-colors" />
+          <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium">
             {satellite.label}
           </span>
           <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/20 transition-all blur-md" />
@@ -136,7 +135,7 @@ export const Hero = () => {
 
         {/* Mobile position */}
         <motion.div
-          className="md:hidden absolute glass-strong rounded-full p-2.5 cursor-pointer"
+          className="md:hidden absolute glass-strong rounded-full p-2 cursor-pointer"
           style={{
             x: posXMobile,
             y: posYMobile,
@@ -145,7 +144,7 @@ export const Hero = () => {
           }}
           whileHover={{ scale: 1.3 }}
         >
-          <satellite.icon className="w-4 h-4 text-primary group-hover:text-cosmic-pink transition-colors" />
+          <satellite.icon className="w-3.5 h-3.5 text-primary group-hover:text-cosmic-pink transition-colors" />
           <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/20 transition-all blur-md" />
         </motion.div>
       </motion.button>
@@ -155,7 +154,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
@@ -167,34 +166,32 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background" />
       </div>
 
-      {/* Floating Planet with Satellites */}
-      <div className="relative z-10 flex flex-col items-center pt-32 md:pt-28 lg:pt-24">
-        {/* Planet Container - lower z-index to stay below nav */}
+      {/* Content Container - centered vertically */}
+      <div className="relative z-10 flex flex-col items-center justify-center px-4">
+        {/* Planet Container */}
         <motion.div
           className="relative"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          {/* Orbit paths removed as per user request */}
-
           {/* Planet Glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-44 h-44 md:w-60 md:h-60 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
+            <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-gradient-cosmic opacity-30 blur-3xl animate-pulse-glow" />
           </div>
 
-          {/* Planet - BIGGER */}
+          {/* Planet */}
           <motion.div
-            className="relative w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
+            className="relative w-28 h-28 md:w-40 md:h-40 rounded-full bg-gradient-cosmic shadow-2xl animate-float"
             style={{
-              boxShadow: "0 0 100px hsl(var(--cosmic-purple) / 0.5), inset -12px -12px 40px hsl(var(--cosmic-pink) / 0.3)",
+              boxShadow: "0 0 80px hsl(var(--cosmic-purple) / 0.5), inset -10px -10px 30px hsl(var(--cosmic-pink) / 0.3)",
             }}
             whileHover={{ scale: 1.1 }}
           >
             {/* Planet Surface Details */}
             <div className="absolute inset-2 rounded-full bg-gradient-to-br from-cosmic-purple/30 to-transparent" />
-            <div className="absolute top-6 left-8 w-10 h-5 rounded-full bg-cosmic-pink/20 blur-sm" />
-            <div className="absolute bottom-8 right-6 w-8 h-4 rounded-full bg-cosmic-blue/20 blur-sm" />
+            <div className="absolute top-4 left-6 w-8 h-4 rounded-full bg-cosmic-pink/20 blur-sm" />
+            <div className="absolute bottom-6 right-4 w-6 h-3 rounded-full bg-cosmic-blue/20 blur-sm" />
           </motion.div>
 
           {/* Satellites with clean circular movement */}
@@ -203,17 +200,17 @@ export const Hero = () => {
           ))}
         </motion.div>
 
-        {/* Hero Text with Galaxy Ripple */}
+        {/* Hero Text */}
         <motion.div
-          className="mt-24 md:mt-32 text-center px-4 relative"
-          initial={{ opacity: 0, y: 50 }}
+          className="mt-16 md:mt-20 text-center relative"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           {/* Galaxy Ripple Effect behind name */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none -top-8">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none -top-6">
             <motion.div
-              className="w-[400px] h-[200px] md:w-[600px] md:h-[300px] rounded-full opacity-40"
+              className="w-[300px] h-[150px] md:w-[500px] md:h-[200px] rounded-full opacity-40"
               style={{
                 background: "radial-gradient(ellipse, hsl(var(--cosmic-purple) / 0.3) 0%, hsl(var(--cosmic-pink) / 0.15) 40%, transparent 70%)",
                 filter: "blur(40px)",
@@ -228,39 +225,21 @@ export const Hero = () => {
                 ease: "easeInOut",
               }}
             />
-            {/* Secondary ripple layer */}
-            <motion.div
-              className="absolute w-[300px] h-[150px] md:w-[500px] md:h-[250px] rounded-full"
-              style={{
-                background: "radial-gradient(ellipse, hsl(var(--cosmic-pink) / 0.2) 0%, transparent 60%)",
-                filter: "blur(30px)",
-              }}
-              animate={{
-                scale: [1.02, 1, 1.02],
-                opacity: [0.2, 0.35, 0.2],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            />
           </div>
 
-          <h1 className="text-5xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight relative z-10">
+          <h1 className="text-4xl md:text-7xl font-bold mb-3 md:mb-4 tracking-tight relative z-10">
             <span className="text-gradient font-body">Hey, I'm</span>
             <br />
             <span className="text-foreground" style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, letterSpacing: "-0.01em" }}>Jeevietha</span>
           </h1>
-          <p className="text-muted-foreground text-base md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed relative z-10 font-body">
+          <p className="text-muted-foreground text-sm md:text-lg max-w-md mx-auto mb-5 md:mb-6 leading-relaxed relative z-10 font-body">
             Exploring the intersection of creativity, code, and curiosity — one project at a time.
           </p>
 
           {/* Explore Button with Particle Burst */}
           <motion.button
             onClick={() => scrollToSection("about")}
-            className="relative inline-flex items-center gap-2 glass px-6 md:px-8 py-3 md:py-4 rounded-full font-medium hover:bg-primary/20 transition-all glow-primary group text-sm md:text-base overflow-visible"
+            className="relative inline-flex items-center gap-2 glass px-5 md:px-7 py-2.5 md:py-3 rounded-full font-medium hover:bg-primary/20 transition-all glow-primary group text-sm overflow-visible"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => setButtonHovered(true)}
