@@ -57,7 +57,7 @@ const cancerLines = [
 
 export const Quotes = () => {
   return (
-    <section id="quotes" className="relative h-screen py-12 md:py-16 overflow-hidden flex flex-col justify-center">
+    <section id="quotes" className="relative min-h-screen py-16 md:py-20 overflow-hidden flex flex-col justify-center">
       {/* Section Title */}
       <motion.div
         className="container mx-auto px-4 md:px-6 text-center mb-4 md:mb-8"

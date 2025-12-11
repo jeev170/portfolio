@@ -154,7 +154,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
