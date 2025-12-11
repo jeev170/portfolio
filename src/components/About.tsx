@@ -25,7 +25,7 @@ export const About = () => {
     <section
       id="about"
       ref={containerRef}
-      className="relative min-h-screen py-24 md:py-32 overflow-hidden"
+      className="relative min-h-screen py-16 md:py-20 overflow-hidden flex items-center"
     >
       {/* Fog Layers */}
       <motion.div
