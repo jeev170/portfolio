@@ -56,7 +56,7 @@ export const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<typeof experiences[0] | null>(null);
 
   return (
-    <section id="blog" className="relative py-12 md:py-16 overflow-hidden h-screen flex flex-col justify-center">
+    <section id="blog" className="relative py-16 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
