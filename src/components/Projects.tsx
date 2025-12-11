@@ -86,7 +86,7 @@ const portalVariants = {
 
 export const Projects = () => {
   return (
-    <section id="projects" className="relative py-16 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="projects" className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px]" />

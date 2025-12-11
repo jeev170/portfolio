@@ -153,7 +153,7 @@ export const CreativeLab = () => {
   };
 
   return (
-    <section id="lab" className="relative py-16 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="lab" className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
