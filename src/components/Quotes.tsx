@@ -57,7 +57,7 @@ const cancerLines = [
 
 export const Quotes = () => {
   return (
-    <section id="quotes" className="relative min-h-screen py-24 md:py-32 overflow-hidden">
+    <section id="quotes" className="relative min-h-screen py-16 md:py-20 overflow-hidden flex flex-col justify-center">
       {/* Section Title */}
       <motion.div
         className="container mx-auto px-4 md:px-6 text-center mb-8 md:mb-16"
