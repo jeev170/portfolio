@@ -58,7 +58,7 @@ const certifications = [
 
 export const Certifications = () => {
   return (
-    <section id="certifications" className="relative py-16 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="certifications" className="relative py-12 md:py-16 overflow-hidden h-screen flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />

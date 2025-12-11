@@ -34,49 +34,49 @@ const quotes = [
   },
 ];
 
-// Cancer constellation pattern - the crab shape with quotes positioned around stars
+// Cancer constellation pattern - adjusted for viewport fit
 const cancerStars = [
-  { x: 30, y: 25, size: 5, quoteIndex: 0 },  // Acubens (α)
-  { x: 45, y: 18, size: 6, quoteIndex: 1 },  // Altarf (β) - brightest
-  { x: 60, y: 22, size: 5, quoteIndex: 2 },  // Asellus Australis (δ)
-  { x: 70, y: 32, size: 4, quoteIndex: null },  // Asellus Borealis (γ)
-  { x: 50, y: 50, size: 5, quoteIndex: 3 },  // Tegmine (ζ)
-  { x: 35, y: 45, size: 4, quoteIndex: 4 },  // ι Cancri
-  { x: 48, y: 35, size: 7, quoteIndex: 5 },  // Praesepe (Beehive cluster center)
+  { x: 30, y: 20, size: 5, quoteIndex: 0 },
+  { x: 45, y: 15, size: 6, quoteIndex: 1 },
+  { x: 60, y: 18, size: 5, quoteIndex: 2 },
+  { x: 70, y: 28, size: 4, quoteIndex: null },
+  { x: 50, y: 45, size: 5, quoteIndex: 3 },
+  { x: 35, y: 40, size: 4, quoteIndex: 4 },
+  { x: 48, y: 30, size: 7, quoteIndex: 5 },
 ];
 
 const cancerLines = [
-  { from: { x: 30, y: 25 }, to: { x: 45, y: 18 } },
-  { from: { x: 45, y: 18 }, to: { x: 48, y: 35 } },
-  { from: { x: 48, y: 35 }, to: { x: 60, y: 22 } },
-  { from: { x: 60, y: 22 }, to: { x: 70, y: 32 } },
-  { from: { x: 48, y: 35 }, to: { x: 50, y: 50 } },
-  { from: { x: 50, y: 50 }, to: { x: 35, y: 45 } },
-  { from: { x: 35, y: 45 }, to: { x: 30, y: 25 } },
+  { from: { x: 30, y: 20 }, to: { x: 45, y: 15 } },
+  { from: { x: 45, y: 15 }, to: { x: 48, y: 30 } },
+  { from: { x: 48, y: 30 }, to: { x: 60, y: 18 } },
+  { from: { x: 60, y: 18 }, to: { x: 70, y: 28 } },
+  { from: { x: 48, y: 30 }, to: { x: 50, y: 45 } },
+  { from: { x: 50, y: 45 }, to: { x: 35, y: 40 } },
+  { from: { x: 35, y: 40 }, to: { x: 30, y: 20 } },
 ];
 
 export const Quotes = () => {
   return (
-    <section id="quotes" className="relative min-h-screen py-16 md:py-20 overflow-hidden flex flex-col justify-center">
+    <section id="quotes" className="relative h-screen py-12 md:py-16 overflow-hidden flex flex-col justify-center">
       {/* Section Title */}
       <motion.div
-        className="container mx-auto px-4 md:px-6 text-center mb-8 md:mb-16"
-        initial={{ opacity: 0, y: 50 }}
+        className="container mx-auto px-4 md:px-6 text-center mb-4 md:mb-8"
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <h2 className="font-syne text-3xl md:text-6xl font-bold mb-4">
+        <h2 className="font-syne text-3xl md:text-5xl font-bold mb-2">
           <span className="text-gradient">Stellar</span>{" "}
           <span className="text-foreground">Wisdom</span>
         </h2>
-        <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
+        <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
           Words that guide me through the cosmos — featuring Cancer ♋
         </p>
       </motion.div>
 
-      {/* Constellation Map */}
-      <div className="relative max-w-5xl mx-auto h-[600px] md:h-[700px] px-4 md:px-6">
+      {/* Constellation Map - Desktop */}
+      <div className="hidden md:block relative flex-1 max-w-5xl mx-auto w-full px-4 md:px-6">
         {/* SVG Cancer Constellation Lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {cancerLines.map((line, index) => (
@@ -156,7 +156,7 @@ export const Quotes = () => {
         {/* Cancer label */}
         <motion.div
           className="absolute glass px-4 py-2 rounded-full"
-          style={{ left: "50%", top: "62%", transform: "translate(-50%, 0)" }}
+          style={{ left: "50%", top: "55%", transform: "translate(-50%, 0)" }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
@@ -178,20 +178,20 @@ export const Quotes = () => {
       </div>
 
       {/* Mobile Quotes List */}
-      <div className="md:hidden container mx-auto px-4 mt-8">
-        <div className="space-y-4">
+      <div className="md:hidden container mx-auto px-4 flex-1 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-3">
           {quotes.map((quote, index) => (
             <motion.div
               key={quote.id}
-              className="glass-strong rounded-xl p-4"
+              className="glass-strong rounded-xl p-3"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05 }}
               viewport={{ once: true }}
             >
-              <Quote className="w-4 h-4 text-primary mb-2" />
-              <p className="text-foreground text-sm leading-relaxed mb-2">"{quote.text}"</p>
-              <p className="text-xs text-muted-foreground">— {quote.author}</p>
+              <Quote className="w-3 h-3 text-primary mb-1" />
+              <p className="text-foreground text-xs leading-relaxed mb-1 line-clamp-3">"{quote.text}"</p>
+              <p className="text-[10px] text-muted-foreground">— {quote.author}</p>
             </motion.div>
           ))}
         </div>
