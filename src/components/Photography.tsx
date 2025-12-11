@@ -23,7 +23,7 @@ const row2Photos = [...photos.reverse(), ...photos.reverse()];
 
 export const Photography = () => {
   return (
-    <section id="photos" className="relative py-16 md:py-20 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="photos" className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/5 rounded-full blur-[200px]" />
