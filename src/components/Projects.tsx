@@ -2,60 +2,65 @@ import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Sparkles } from "lucide-react";
 import { useRef } from "react";
 
+// ==========================================
+// UPDATE YOUR PROJECT DETAILS HERE
+// Add your GitHub and live demo URLs
+// ==========================================
 const projects = [
   {
     id: 1,
-    title: "Nebula Dashboard",
-    description: "A cosmic analytics platform with real-time data visualization and AI-powered insights.",
-    tags: ["React", "Three.js", "AI"],
-    gradient: "from-cosmic-purple to-cosmic-blue",
-    thumbnail: "linear-gradient(135deg, hsl(258 90% 40%) 0%, hsl(220 90% 35%) 50%, hsl(258 90% 25%) 100%)",
-    delay: 0,
-  },
-  {
-    id: 2,
     title: "Aurora Studio",
     description: "Creative design tool for generating ethereal visual effects and animations.",
     tags: ["Canvas", "WebGL", "Animation"],
     gradient: "from-cosmic-pink to-cosmic-purple",
     thumbnail: "linear-gradient(135deg, hsl(330 85% 45%) 0%, hsl(258 90% 50%) 50%, hsl(330 85% 35%) 100%)",
-    delay: 0.1,
+    delay: 0,
+    liveUrl: "#", // Add your live demo URL
+    githubUrl: "https://github.com/jeev170", // Add your GitHub repo URL
   },
   {
-    id: 3,
+    id: 2,
     title: "Stellar Commerce",
     description: "E-commerce platform with immersive 3D product showcases and AR integration.",
     tags: ["Next.js", "AR", "Stripe"],
     gradient: "from-cosmic-cyan to-cosmic-blue",
     thumbnail: "linear-gradient(135deg, hsl(185 85% 40%) 0%, hsl(220 90% 45%) 50%, hsl(185 85% 30%) 100%)",
-    delay: 0.2,
+    delay: 0.1,
+    liveUrl: "#",
+    githubUrl: "https://github.com/jeev170",
   },
   {
-    id: 4,
+    id: 3,
     title: "Dreamweaver CMS",
     description: "Content management system designed for storytellers and visual creators.",
     tags: ["TypeScript", "GraphQL", "Cloud"],
     gradient: "from-cosmic-purple to-cosmic-pink",
     thumbnail: "linear-gradient(135deg, hsl(258 90% 45%) 0%, hsl(330 85% 50%) 50%, hsl(280 85% 40%) 100%)",
-    delay: 0.3,
+    delay: 0.2,
+    liveUrl: "#",
+    githubUrl: "https://github.com/jeev170",
   },
   {
-    id: 5,
+    id: 4,
     title: "Cosmic Chat",
     description: "Real-time messaging platform with AI-powered translation and sentiment analysis.",
     tags: ["Socket.io", "AI", "React"],
     gradient: "from-cosmic-blue to-cosmic-cyan",
     thumbnail: "linear-gradient(135deg, hsl(220 90% 40%) 0%, hsl(185 85% 45%) 50%, hsl(220 90% 30%) 100%)",
-    delay: 0.4,
+    delay: 0.3,
+    liveUrl: "#",
+    githubUrl: "https://github.com/jeev170",
   },
   {
-    id: 6,
+    id: 5,
     title: "Starlight Portfolio",
     description: "Animated portfolio template with cosmic theme and interactive 3D elements.",
     tags: ["Framer Motion", "GSAP", "CSS"],
     gradient: "from-cosmic-pink to-cosmic-cyan",
     thumbnail: "linear-gradient(135deg, hsl(330 85% 40%) 0%, hsl(185 85% 50%) 50%, hsl(330 85% 30%) 100%)",
-    delay: 0.5,
+    delay: 0.4,
+    liveUrl: "#",
+    githubUrl: "https://github.com/jeev170",
   },
 ];
 
@@ -204,22 +209,28 @@ export const Projects = () => {
 
                     {/* Actions */}
                     <div className="flex gap-3 md:gap-4">
-                      <motion.button
+                      <motion.a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="glass px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 text-xs md:text-sm hover:bg-primary/20 transition-all"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <ExternalLink className="w-3 h-3 md:w-4 md:h-4" />
                         <span>View</span>
-                      </motion.button>
-                      <motion.button
+                      </motion.a>
+                      <motion.a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="glass px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 text-xs md:text-sm hover:bg-primary/20 transition-all"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <Github className="w-3 h-3 md:w-4 md:h-4" />
-                        <span>Code</span>
-                      </motion.button>
+                        <span>GitHub</span>
+                      </motion.a>
                     </div>
                   </div>
 

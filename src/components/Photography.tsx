@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
-import { Upload, Plus } from "lucide-react";
 
-// Generate photos for gallery - placeholder images that can be replaced
+// ==========================================
+// ADD YOUR PHOTOS HERE - Replace gradient with actual image imports
+// Example:
+// import photo1 from "@/assets/photos/photo1.jpg";
+// Then set: image: photo1
+// ==========================================
 const photos = [
   { id: 1, title: "Cosmic Dawn", gradient: "from-cosmic-purple to-cosmic-pink", image: null },
   { id: 2, title: "Ethereal Forest", gradient: "from-cosmic-blue to-cosmic-cyan", image: null },
@@ -12,9 +16,6 @@ const photos = [
   { id: 7, title: "Frozen Galaxy", gradient: "from-cosmic-blue to-cosmic-purple", image: null },
   { id: 8, title: "Cloud Kingdom", gradient: "from-cosmic-cyan to-cosmic-pink", image: null },
 ];
-
-// Upload placeholder card
-const uploadPlaceholder = { id: "upload", title: "Add Photo", isUpload: true };
 
 // Duplicate for seamless loop
 const row1Photos = [...photos, ...photos];
@@ -46,27 +47,6 @@ export const Photography = () => {
           </p>
         </motion.div>
 
-        {/* Upload Placeholder */}
-        <motion.div
-          className="flex justify-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="w-48 h-36 md:w-64 md:h-48 rounded-xl md:rounded-2xl glass-strong border-2 border-dashed border-primary/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/60 hover:bg-primary/5 transition-all group"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full glass flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-              <Upload className="w-5 h-5 md:w-6 md:h-6 text-primary" />
-            </div>
-            <p className="text-muted-foreground text-sm font-medium">Upload Photos</p>
-            <p className="text-muted-foreground/60 text-xs mt-1">Click to add images</p>
-          </motion.div>
-        </motion.div>
-
         {/* Scrolling Rows */}
         <div className="space-y-6">
           {/* Row 1 - Left to Right */}
@@ -85,15 +65,23 @@ export const Photography = () => {
               {row1Photos.map((photo, index) => (
                 <div
                   key={`row1-${photo.id}-${index}`}
-                  className="flex-shrink-0 w-64 h-48 md:w-80 md:h-56 rounded-xl md:rounded-2xl overflow-hidden glass-strong group cursor-pointer"
+                  className="flex-shrink-0 w-64 md:w-80 aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden glass-strong group cursor-pointer"
                 >
-                  <div className={`w-full h-full bg-gradient-to-br ${photo.gradient} relative`}>
-                    <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-all duration-300" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
-                      <h3 className="font-syne font-bold text-sm md:text-base">{photo.title}</h3>
+                  {photo.image ? (
+                    <img 
+                      src={photo.image} 
+                      alt={photo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${photo.gradient} relative`}>
+                      <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-all duration-300" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
+                        <h3 className="font-syne font-bold text-sm md:text-base">{photo.title}</h3>
+                      </div>
+                      <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300 -z-10`} />
                     </div>
-                    <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300 -z-10`} />
-                  </div>
+                  )}
                 </div>
               ))}
             </motion.div>
@@ -115,15 +103,23 @@ export const Photography = () => {
               {row2Photos.map((photo, index) => (
                 <div
                   key={`row2-${photo.id}-${index}`}
-                  className="flex-shrink-0 w-64 h-48 md:w-80 md:h-56 rounded-xl md:rounded-2xl overflow-hidden glass-strong group cursor-pointer"
+                  className="flex-shrink-0 w-64 md:w-80 aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden glass-strong group cursor-pointer"
                 >
-                  <div className={`w-full h-full bg-gradient-to-br ${photo.gradient} relative`}>
-                    <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-all duration-300" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
-                      <h3 className="font-syne font-bold text-sm md:text-base">{photo.title}</h3>
+                  {photo.image ? (
+                    <img 
+                      src={photo.image} 
+                      alt={photo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${photo.gradient} relative`}>
+                      <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-all duration-300" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
+                        <h3 className="font-syne font-bold text-sm md:text-base">{photo.title}</h3>
+                      </div>
+                      <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300 -z-10`} />
                     </div>
-                    <div className={`absolute -inset-1 bg-gradient-to-r ${photo.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300 -z-10`} />
-                  </div>
+                  )}
                 </div>
               ))}
             </motion.div>
