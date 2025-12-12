@@ -166,8 +166,8 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background" />
       </div>
 
-      {/* Content Container - centered vertically */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4">
+       {/* Content Container - centered vertically */}
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 mt-16 md:mt-20">
         {/* Planet Container */}
         <motion.div
           className="relative"
