@@ -154,7 +154,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden py-16 md:py-20"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
@@ -167,7 +167,7 @@ export const Hero = () => {
       </div>
 
        {/* Content Container - centered vertically */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 mt-16 md:mt-20">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 mt-12 md:mt-16 lg:mt-20">
         {/* Planet Container */}
         <motion.div
           className="relative"
