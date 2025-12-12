@@ -5,8 +5,8 @@ const socialLinks = [
   { 
     icon: Mail, 
     label: "Email", 
-    href: "mailto:jeevietha@example.com",
-    description: "Drop me a message"
+    href: "mailto:jeevietha11@gmail.com",
+    description: "Drop by"
   },
   { 
     icon: Github, 
@@ -23,7 +23,7 @@ const socialLinks = [
   { 
     icon: Instagram, 
     label: "Instagram", 
-    href: "https://instagram.com/jeevietha",
+    href: "https://instagram.com/jeevietha_",
     description: "See my world"
   },
 ];
@@ -91,8 +91,8 @@ export const Connect = () => {
           </h2>
 
           <p className="text-muted-foreground text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 px-4">
-            Have a project in mind? Want to collaborate on something cosmic? 
-            I'm always excited to connect with fellow dreamers and creators.
+            Looking to discuss a project or potential collaboration?
+            I’m available for opportunities and open conversations.
           </p>
 
           {/* CTA Button */}
