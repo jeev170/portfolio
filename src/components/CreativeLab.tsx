@@ -257,38 +257,51 @@ export const CreativeLab = () => {
                 ))}
               </div>
 
-              {/* SVG for constellation lines */}
+              {/* SVG for constellation lines and stars */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                {/* Lines */}
                 {generateLines()}
-              </svg>
-
-              {/* Stars */}
-              {stars.map((star, index) => (
-                <motion.div
-                  key={star.id}
-                  className="absolute"
-                  style={{
-                    left: `${star.x}%`,
-                    top: `${star.y}%`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="relative">
-                    <div 
-                      className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-primary"
-                      style={{ boxShadow: "0 0 15px hsl(var(--primary)), 0 0 30px hsl(var(--primary) / 0.5)" }}
+                
+                {/* Stars as SVG circles for perfect alignment */}
+                {stars.map((star, index) => (
+                  <g key={star.id}>
+                    {/* Outer glow */}
+                    <motion.circle
+                      cx={`${star.x}%`}
+                      cy={`${star.y}%`}
+                      r="16"
+                      fill="hsl(var(--primary) / 0.3)"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     />
-                    <div className="absolute inset-0 w-3 h-3 md:w-4 md:h-4 rounded-full bg-primary animate-ping opacity-30" />
-                    {/* Star number label */}
-                    <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] md:text-xs text-muted-foreground">
+                    {/* Main star */}
+                    <motion.circle
+                      cx={`${star.x}%`}
+                      cy={`${star.y}%`}
+                      r="8"
+                      fill="hsl(var(--primary))"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      style={{ filter: "drop-shadow(0 0 8px hsl(var(--primary)))" }}
+                    />
+                    {/* Star number */}
+                    <motion.text
+                      x={`${star.x}%`}
+                      y={`${star.y - 4}%`}
+                      textAnchor="middle"
+                      fill="hsl(var(--muted-foreground))"
+                      fontSize="12"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
                       {index + 1}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+                    </motion.text>
+                  </g>
+                ))}
+              </svg>
 
               {/* Constellation name display */}
               {constellationName && stars.length >= 2 && (
