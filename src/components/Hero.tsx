@@ -230,10 +230,10 @@ export const Hero = () => {
           <h1 className="text-4xl md:text-7xl font-bold mb-3 md:mb-4 tracking-tight relative z-10">
             <span className="text-gradient font-body">Hey, I'm</span>
             <br />
-            <span className="text-foreground" style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, letterSpacing: "-0.01em" }}>Jeevietha</span>
+            <span className="text-foreground font-retro text-5xl md:text-8xl tracking-wide">JEEVIETHA</span>
           </h1>
           <p className="text-muted-foreground text-sm md:text-lg max-w-md mx-auto mb-5 md:mb-6 leading-relaxed relative z-10 font-body">
-            Exploring the intersection of creativity, code, and curiosity — one project at a time.
+            A dreamer who codes, creates, and captures moments — crafting stories through pixels and passion.
           </p>
 
           {/* Explore Button with Particle Burst */}

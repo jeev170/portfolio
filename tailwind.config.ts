@@ -17,6 +17,7 @@ export default {
         syne: ["Syne", "sans-serif"],
         sans: ["DM Sans", "sans-serif"],
         serif: ["DM Serif Display", "serif"],
+        retro: ["Bebas Neue", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
