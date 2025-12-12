@@ -11,7 +11,6 @@ import { Certifications } from "@/components/Certifications";
 import { CreativeLab } from "@/components/CreativeLab";
 import { Quotes } from "@/components/Quotes";
 import { Connect } from "@/components/Connect";
-import { Footer } from "@/components/Footer";
 import { Currently } from "@/components/Currently";
 
 const Index = () => {
@@ -40,9 +39,6 @@ const Index = () => {
         <Quotes />
         <Connect />
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
