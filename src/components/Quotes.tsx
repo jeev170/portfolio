@@ -57,7 +57,7 @@ const cancerLines = [
 
 export const Quotes = () => {
   return (
-    <section id="quotes" className="relative min-h-screen pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden flex flex-col justify-center">
+    <section id="quotes" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
       {/* Section Title */}
       <motion.div
         className="container mx-auto px-4 md:px-6 text-center mb-4 md:mb-8"
@@ -76,7 +76,7 @@ export const Quotes = () => {
       </motion.div>
 
       {/* Constellation Map - Desktop */}
-      <div className="hidden md:block relative flex-1 max-w-5xl mx-auto w-full px-4 md:px-6">
+      <div className="hidden md:block relative h-[400px] lg:h-[450px] max-w-5xl mx-auto w-full px-4 md:px-6">
         {/* SVG Cancer Constellation Lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {cancerLines.map((line, index) => (
@@ -178,7 +178,7 @@ export const Quotes = () => {
       </div>
 
       {/* Mobile Quotes List */}
-      <div className="md:hidden container mx-auto px-4 flex-1 overflow-y-auto">
+      <div className="md:hidden container mx-auto px-4">
         <div className="grid grid-cols-2 gap-3">
           {quotes.map((quote, index) => (
             <motion.div

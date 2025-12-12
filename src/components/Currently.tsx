@@ -57,7 +57,7 @@ const RotatingNebula = () => {
 
 export const Currently = () => {
   return (
-    <section id="currently" className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="currently" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
       {/* Rotating Nebula Background */}
       <RotatingNebula />
 
