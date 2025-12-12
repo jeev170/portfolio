@@ -6,7 +6,7 @@ const socialLinks = [
     icon: Mail, 
     label: "Email", 
     href: "mailto:jeevietha11@gmail.com",
-    description: "Drop by"
+    description: "Drop a mail"
   },
   { 
     icon: Github, 
