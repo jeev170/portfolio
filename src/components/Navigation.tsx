@@ -78,15 +78,17 @@ export const Navigation = () => {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </motion.button>
 
-          {/* Desktop CTA */}
-          <motion.button
-            onClick={() => scrollToSection("connect")}
-            className="hidden lg:flex glass px-4 xl:px-5 py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-primary/20 transition-all glow-primary cursor-pointer"
+          {/* Desktop CTA - Resume Download */}
+          <motion.a
+            href="/portfolio/resume.pdf"
+            download="Jeevietha_Resume.pdf"
+            className="hidden lg:flex items-center gap-2 glass px-4 xl:px-5 py-2 rounded-full text-xs xl:text-sm font-medium hover:bg-primary/20 transition-all glow-primary cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Let's Connect
-          </motion.button>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Resume
+          </motion.a>
         </div>
       </motion.nav>
 
