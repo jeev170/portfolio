@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { StarField } from "@/components/StarField";
+import { ShootingStars } from "@/components/ShootingStars";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
@@ -18,6 +19,9 @@ const Index = () => {
     <div className="relative min-h-screen bg-background overflow-x-hidden">
       {/* Star Field Background */}
       <StarField count={150} />
+      
+      {/* Shooting Stars Effect */}
+      <ShootingStars />
 
       {/* Navigation */}
       <Navigation />
