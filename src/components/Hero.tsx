@@ -1,17 +1,16 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { Rocket, Camera, BookOpen, User, Sparkles, Quote, Mail, Code2, FlaskConical } from "lucide-react";
+import { Rocket, BookOpen, User, Sparkles, Quote, Mail, Code2, FlaskConical } from "lucide-react";
 import { useEffect, useState } from "react";
 import cosmicBg from "@/assets/cosmic-bg.jpg";
 
 const satellites = [
   { icon: User, label: "About", sectionId: "about", delay: 0 },
   { icon: Rocket, label: "Projects", sectionId: "projects", delay: 0.125 },
-  { icon: Camera, label: "Photos", sectionId: "photos", delay: 0.25 },
-  { icon: BookOpen, label: "Blog", sectionId: "blog", delay: 0.375 },
-  { icon: Code2, label: "Skills", sectionId: "skills", delay: 0.5 },
-  { icon: FlaskConical, label: "Lab", sectionId: "lab", delay: 0.625 },
-  { icon: Quote, label: "Quotes", sectionId: "quotes", delay: 0.75 },
-  { icon: Mail, label: "Connect", sectionId: "connect", delay: 0.875 },
+  { icon: BookOpen, label: "Blog", sectionId: "blog", delay: 0.25 },
+  { icon: Code2, label: "Skills", sectionId: "skills", delay: 0.375 },
+  { icon: FlaskConical, label: "Lab", sectionId: "lab", delay: 0.5 },
+  { icon: Quote, label: "Quotes", sectionId: "quotes", delay: 0.625 },
+  { icon: Mail, label: "Connect", sectionId: "connect", delay: 0.75 },
 ];
 
 const scrollToSection = (sectionId: string) => {
