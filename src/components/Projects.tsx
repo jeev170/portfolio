@@ -1,10 +1,11 @@
 import { motion, useInView } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Github } from "lucide-react";
 import { useRef } from "react";
 
 // ==========================================
 // UPDATE YOUR PROJECT DETAILS HERE
 // Add your project images to src/assets/projects/
+// Add GitHub links for each project
 // ==========================================
 const projects = [
   {
@@ -15,6 +16,7 @@ const projects = [
     gradient: "from-cosmic-pink to-cosmic-purple",
     thumbnail: "linear-gradient(135deg, hsl(330 85% 45%) 0%, hsl(258 90% 50%) 50%, hsl(330 85% 35%) 100%)",
     delay: 0,
+    github: "https://github.com/jeev170/aurora-studio",
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ const projects = [
     gradient: "from-cosmic-cyan to-cosmic-blue",
     thumbnail: "linear-gradient(135deg, hsl(185 85% 40%) 0%, hsl(220 90% 45%) 50%, hsl(185 85% 30%) 100%)",
     delay: 0.1,
+    github: "https://github.com/jeev170/stellar-commerce",
   },
   {
     id: 3,
@@ -33,6 +36,7 @@ const projects = [
     gradient: "from-cosmic-purple to-cosmic-pink",
     thumbnail: "linear-gradient(135deg, hsl(258 90% 45%) 0%, hsl(330 85% 50%) 50%, hsl(280 85% 40%) 100%)",
     delay: 0.2,
+    github: "https://github.com/jeev170/dreamweaver-cms",
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const projects = [
     gradient: "from-cosmic-blue to-cosmic-cyan",
     thumbnail: "linear-gradient(135deg, hsl(220 90% 40%) 0%, hsl(185 85% 45%) 50%, hsl(220 90% 30%) 100%)",
     delay: 0.3,
+    github: "https://github.com/jeev170/cosmic-chat",
   },
   {
     id: 5,
@@ -51,6 +56,7 @@ const projects = [
     gradient: "from-cosmic-pink to-cosmic-cyan",
     thumbnail: "linear-gradient(135deg, hsl(330 85% 40%) 0%, hsl(185 85% 50%) 50%, hsl(330 85% 30%) 100%)",
     delay: 0.4,
+    github: "https://github.com/jeev170/starlight-portfolio",
   },
   {
     id: 6,
@@ -60,6 +66,7 @@ const projects = [
     gradient: "from-cosmic-purple to-cosmic-blue",
     thumbnail: "linear-gradient(135deg, hsl(258 90% 40%) 0%, hsl(220 90% 50%) 50%, hsl(258 90% 30%) 100%)",
     delay: 0.5,
+    github: "https://github.com/jeev170/nova-analytics",
   },
 ];
 
@@ -96,17 +103,19 @@ export const Projects = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Title */}
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-6 md:mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-syne text-3xl md:text-5xl font-bold mb-3">
-            <span className="text-foreground">Project</span>{" "}
-            <span className="text-gradient">Portals</span>
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <h2 className="font-syne text-2xl md:text-4xl font-bold">
+              <span className="text-foreground">Project</span>{" "}
+              <span className="text-gradient">Portals</span>
+            </h2>
+          </div>
+          <p className="text-muted-foreground text-xs md:text-sm max-w-md mx-auto">
             Step through each portal to explore my creative dimensions
           </p>
         </motion.div>
@@ -194,16 +203,29 @@ export const Projects = () => {
                       {project.description}
                     </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 text-[9px] md:text-[10px] rounded-full bg-secondary text-muted-foreground"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    {/* Tags and GitHub */}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 text-[9px] md:text-[10px] rounded-full bg-secondary text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors"
+                        whileHover={{ scale: 1.1, rotate: 10 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Github className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                      </motion.a>
                     </div>
                   </div>
 

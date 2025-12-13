@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Instagram, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, Github, Linkedin, Instagram, ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 
 const socialLinks = [
   { 
@@ -30,7 +30,7 @@ const socialLinks = [
 
 export const Connect = () => {
   return (
-    <section id="connect" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section id="connect" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[200px]" />
@@ -70,7 +70,7 @@ export const Connect = () => {
         >
           {/* Floating icon */}
           <motion.div
-            className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full glass-strong mb-6 md:mb-8"
+            className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full glass-strong mb-4 md:mb-6"
             animate={{
               y: [0, -10, 0],
               rotate: [0, 5, -5, 0],
@@ -81,24 +81,26 @@ export const Connect = () => {
               ease: "easeInOut",
             }}
           >
-            <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-primary" />
+            <Sparkles className="w-7 h-7 md:w-8 md:h-8 text-primary" />
           </motion.div>
 
-          <h2 className="font-syne text-3xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6">
+          <h2 className="font-syne text-2xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4">
             <span className="text-foreground">Let's Build</span>
             <br />
             <span className="text-gradient">Something Beautiful</span>
           </h2>
 
-          <p className="text-muted-foreground text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 px-4">
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 px-4">
             Looking to discuss a project or potential collaboration?
-            I’m available for opportunities and open conversations.
+            I'm available for opportunities and open conversations.
           </p>
 
-          {/* CTA Button */}
+          {/* CTA Button - Discord */}
           <motion.a
-            href="mailto:jeevietha@example.com"
-            className="inline-flex items-center gap-2 md:gap-3 glass-strong px-6 md:px-8 py-3 md:py-4 rounded-full font-medium text-sm md:text-lg mb-12 md:mb-16 group relative overflow-hidden"
+            href="https://discordapp.com/users/1321782125216665620"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 md:gap-3 glass-strong px-5 md:px-7 py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base mb-8 md:mb-10 group relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -107,7 +109,7 @@ export const Connect = () => {
             <div className="absolute inset-[2px] rounded-full bg-card" />
             
             <span className="relative flex items-center gap-2 md:gap-3">
-              <Mail className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+              <MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-primary" />
               <span>Start a Conversation</span>
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
             </span>

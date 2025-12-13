@@ -58,7 +58,7 @@ const certifications = [
 
 export const Certifications = () => {
   return (
-    <section id="certifications" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section id="certifications" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
@@ -68,23 +68,23 @@ export const Certifications = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Title */}
         <motion.div
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-syne text-3xl md:text-6xl font-bold mb-4">
+          <h2 className="font-syne text-2xl md:text-5xl font-bold mb-3">
             <span className="text-foreground">Certifications</span>{" "}
             <span className="text-gradient">& Credentials</span>
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
+          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
             Milestones in my continuous learning journey
           </p>
         </motion.div>
 
-        {/* Certifications Stack */}
-        <div className="max-w-3xl mx-auto space-y-4">
+        {/* Certifications Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 max-w-5xl mx-auto">
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.id}

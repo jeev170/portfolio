@@ -34,25 +34,33 @@ const quotes = [
   },
 ];
 
-// Cancer constellation pattern - adjusted for viewport fit
+// Additional quote for 7th star
+const additionalQuote = {
+  id: 7,
+  text: "Look up at the stars and not down at your feet.",
+  author: "Stephen Hawking",
+};
+
+// Cancer constellation pattern - stars positioned exactly on line intersections
 const cancerStars = [
-  { x: 30, y: 20, size: 5, quoteIndex: 0 },
-  { x: 45, y: 15, size: 6, quoteIndex: 1 },
-  { x: 60, y: 18, size: 5, quoteIndex: 2 },
-  { x: 70, y: 28, size: 4, quoteIndex: null },
-  { x: 50, y: 45, size: 5, quoteIndex: 3 },
-  { x: 35, y: 40, size: 4, quoteIndex: 4 },
-  { x: 48, y: 30, size: 7, quoteIndex: 5 },
+  { x: 25, y: 25, size: 5, quoteIndex: 0 },
+  { x: 40, y: 18, size: 6, quoteIndex: 1 },
+  { x: 55, y: 22, size: 5, quoteIndex: 2 },
+  { x: 68, y: 32, size: 5, quoteIndex: 6 },  // Now has quote
+  { x: 52, y: 52, size: 5, quoteIndex: 3 },
+  { x: 35, y: 48, size: 4, quoteIndex: 4 },
+  { x: 45, y: 35, size: 7, quoteIndex: 5 },  // Center star
 ];
 
+// Lines connect exactly to star positions
 const cancerLines = [
-  { from: { x: 30, y: 20 }, to: { x: 45, y: 15 } },
-  { from: { x: 45, y: 15 }, to: { x: 48, y: 30 } },
-  { from: { x: 48, y: 30 }, to: { x: 60, y: 18 } },
-  { from: { x: 60, y: 18 }, to: { x: 70, y: 28 } },
-  { from: { x: 48, y: 30 }, to: { x: 50, y: 45 } },
-  { from: { x: 50, y: 45 }, to: { x: 35, y: 40 } },
-  { from: { x: 35, y: 40 }, to: { x: 30, y: 20 } },
+  { from: { x: 25, y: 25 }, to: { x: 40, y: 18 } },
+  { from: { x: 40, y: 18 }, to: { x: 45, y: 35 } },
+  { from: { x: 45, y: 35 }, to: { x: 55, y: 22 } },
+  { from: { x: 55, y: 22 }, to: { x: 68, y: 32 } },
+  { from: { x: 45, y: 35 }, to: { x: 52, y: 52 } },
+  { from: { x: 52, y: 52 }, to: { x: 35, y: 48 } },
+  { from: { x: 35, y: 48 }, to: { x: 25, y: 25 } },
 ];
 
 export const Quotes = () => {
@@ -136,7 +144,7 @@ export const Quotes = () => {
             </motion.div>
 
             {/* Quote Tooltip - shows on hover */}
-            {star.quoteIndex !== null && quotes[star.quoteIndex] && (
+            {star.quoteIndex !== null && (
               <motion.div
                 className={`absolute z-50 glass-strong rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none min-w-[200px] max-w-[280px] ${
                   star.x > 50 ? "right-8" : "left-8"
@@ -145,9 +153,11 @@ export const Quotes = () => {
               >
                 <Quote className="w-4 h-4 text-primary mb-2" />
                 <p className="text-foreground text-sm leading-relaxed mb-2">
-                  "{quotes[star.quoteIndex].text}"
+                  "{star.quoteIndex === 6 ? additionalQuote.text : quotes[star.quoteIndex].text}"
                 </p>
-                <p className="text-xs text-muted-foreground">— {quotes[star.quoteIndex].author}</p>
+                <p className="text-xs text-muted-foreground">
+                  — {star.quoteIndex === 6 ? additionalQuote.author : quotes[star.quoteIndex].author}
+                </p>
               </motion.div>
             )}
           </motion.div>
