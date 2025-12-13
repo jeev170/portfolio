@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, ArrowRight, MapPin, Briefcase, Heart, Sparkles, X } from "lucide-react";
+import { TiltCard } from "./TiltCard";
 
 const experiences = [
   {
@@ -158,60 +159,54 @@ export const Blog = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <motion.div
-                className={`glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 h-full bg-gradient-to-br ${post.gradient} cursor-pointer relative overflow-hidden`}
-                whileHover={{
-                  scale: 1.03,
-                  y: -5,
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-                onClick={() => setSelectedPost(post)}
-              >
-                {/* Icon */}
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl glass flex items-center justify-center mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
-                  <post.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
-                </div>
-
-                {/* Meta */}
-                <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {post.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {post.readTime}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <h3 className="font-syne text-base md:text-lg font-bold mb-2 md:mb-3 group-hover:text-gradient transition-all line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-muted-foreground text-xs md:text-sm leading-relaxed mb-4 md:mb-6 line-clamp-3">
-                  {post.excerpt}
-                </p>
-
-                {/* Location if exists */}
-                {post.location && (
-                  <span className="inline-flex items-center gap-1 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
-                    <MapPin className="w-3 h-3" />
-                    {post.location}
-                  </span>
-                )}
-
-                {/* Read More */}
-                <motion.span
-                  className="inline-flex items-center gap-2 text-primary text-xs md:text-sm font-medium"
-                  whileHover={{ x: 5 }}
+              <TiltCard tiltAmount={8} glareEnabled={true} className="h-full">
+                <div
+                  className={`glass-strong rounded-xl md:rounded-2xl p-4 md:p-6 h-full bg-gradient-to-br ${post.gradient} cursor-pointer relative overflow-hidden`}
+                  onClick={() => setSelectedPost(post)}
                 >
-                  Read More
-                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-                </motion.span>
+                  {/* Icon */}
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl glass flex items-center justify-center mb-3 md:mb-4 group-hover:bg-primary/20 transition-colors">
+                    <post.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                  </div>
 
-                {/* Glass reflection effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl md:rounded-2xl pointer-events-none" />
-              </motion.div>
+                  {/* Meta */}
+                  <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {post.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {post.readTime}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="font-syne text-base md:text-lg font-bold mb-2 md:mb-3 group-hover:text-gradient transition-all line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed mb-4 md:mb-6 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Location if exists */}
+                  {post.location && (
+                    <span className="inline-flex items-center gap-1 text-[10px] md:text-xs text-muted-foreground mb-3 md:mb-4">
+                      <MapPin className="w-3 h-3" />
+                      {post.location}
+                    </span>
+                  )}
+
+                  {/* Read More */}
+                  <span className="inline-flex items-center gap-2 text-primary text-xs md:text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    Read More
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+                  </span>
+
+                  {/* Glass reflection effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-transparent via-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl md:rounded-2xl pointer-events-none" />
+                </div>
+              </TiltCard>
             </motion.article>
           ))}
         </div>

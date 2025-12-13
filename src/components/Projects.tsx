@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { Sparkles, Github } from "lucide-react";
 import { useRef } from "react";
+import { TiltCard } from "./TiltCard";
 
 // ==========================================
 // UPDATE YOUR PROJECT DETAILS HERE
@@ -136,104 +137,102 @@ export const Projects = () => {
                 animate={isInView ? "visible" : "hidden"}
                 custom={project.delay}
               >
-                <motion.div
-                  className="relative glass-strong rounded-xl md:rounded-2xl overflow-hidden cursor-pointer h-full"
-                  whileHover={{
-                    rotateX: 2,
-                    rotateY: -2,
-                    scale: 1.02,
-                    transition: { duration: 0.3 },
-                  }}
+                <TiltCard 
+                  tiltAmount={10} 
+                  glareEnabled={true}
+                  className="h-full"
                 >
-                  {/* Portal Opening Glow Effect */}
-                  <motion.div
-                    className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} rounded-xl md:rounded-2xl blur-lg`}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 0.15, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.6, delay: project.delay + 0.2 }}
-                  />
-
-                  {/* Hover Glow Enhancement */}
-                  <div
-                    className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-30 rounded-xl md:rounded-2xl blur-lg transition-opacity duration-500`}
-                  />
-
-                  {/* Project Thumbnail */}
-                  <div 
-                    className="relative h-24 md:h-28 w-full overflow-hidden"
-                    style={{ background: project.thumbnail }}
-                  >
-                    {/* Abstract cosmic pattern overlay */}
-                    <div className="absolute inset-0 opacity-30">
-                      <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-white/20 blur-xl" />
-                      <div className="absolute bottom-1/3 right-1/3 w-16 h-16 rounded-full bg-white/10 blur-2xl" />
-                    </div>
-                    {/* Gradient fade to card */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
-                    
-                    {/* Portal Ring in thumbnail */}
+                  <div className="relative glass-strong rounded-xl md:rounded-2xl overflow-hidden cursor-pointer h-full">
+                    {/* Portal Opening Glow Effect */}
                     <motion.div
-                      className={`absolute top-3 right-3 w-10 h-10 rounded-full bg-gradient-to-r ${project.gradient} opacity-40 blur-sm`}
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
+                      className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} rounded-xl md:rounded-2xl blur-lg`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={isInView ? { opacity: 0.15, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.6, delay: project.delay + 0.2 }}
+                    />
+
+                    {/* Hover Glow Enhancement */}
+                    <div
+                      className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-30 rounded-xl md:rounded-2xl blur-lg transition-opacity duration-500`}
+                    />
+
+                    {/* Project Thumbnail */}
+                    <div 
+                      className="relative h-24 md:h-28 w-full overflow-hidden"
+                      style={{ background: project.thumbnail }}
+                    >
+                      {/* Abstract cosmic pattern overlay */}
+                      <div className="absolute inset-0 opacity-30">
+                        <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-white/20 blur-xl" />
+                        <div className="absolute bottom-1/3 right-1/3 w-16 h-16 rounded-full bg-white/10 blur-2xl" />
+                      </div>
+                      {/* Gradient fade to card */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
+                      
+                      {/* Portal Ring in thumbnail */}
+                      <motion.div
+                        className={`absolute top-3 right-3 w-10 h-10 rounded-full bg-gradient-to-r ${project.gradient} opacity-40 blur-sm`}
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0.3, 0.5, 0.3],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 p-4 md:p-5">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+                        <span className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider">
+                          Portal #{project.id}
+                        </span>
+                      </div>
+
+                      <h3 className="font-syne text-base md:text-lg font-bold mb-1.5 group-hover:text-gradient transition-all">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-muted-foreground text-xs md:text-sm mb-3 leading-relaxed line-clamp-2">
+                        {project.description}
+                      </p>
+
+                      {/* Tags and GitHub */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-0.5 text-[9px] md:text-[10px] rounded-full bg-secondary text-muted-foreground"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <motion.a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors"
+                          whileHover={{ scale: 1.1, rotate: 10 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Github className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                        </motion.a>
+                      </div>
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-xl md:rounded-2xl pointer-events-none`}
                     />
                   </div>
-
-                  {/* Content */}
-                  <div className="relative z-10 p-4 md:p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-                      <span className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wider">
-                        Portal #{project.id}
-                      </span>
-                    </div>
-
-                    <h3 className="font-syne text-base md:text-lg font-bold mb-1.5 group-hover:text-gradient transition-all">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-muted-foreground text-xs md:text-sm mb-3 leading-relaxed line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    {/* Tags and GitHub */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 text-[9px] md:text-[10px] rounded-full bg-secondary text-muted-foreground"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <motion.a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors"
-                        whileHover={{ scale: 1.1, rotate: 10 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Github className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
-                      </motion.a>
-                    </div>
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-xl md:rounded-2xl pointer-events-none`}
-                  />
-                </motion.div>
+                </TiltCard>
               </motion.div>
             );
           })}
