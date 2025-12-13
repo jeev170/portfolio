@@ -11,6 +11,7 @@ import { CreativeLab } from "@/components/CreativeLab";
 import { Quotes } from "@/components/Quotes";
 import { Connect } from "@/components/Connect";
 import { Currently } from "@/components/Currently";
+import { Webring } from "@/components/Webring";
 
 const Index = () => {
   return (
@@ -37,6 +38,9 @@ const Index = () => {
         <Quotes />
         <Connect />
       </main>
+
+      {/* Webring */}
+      <Webring />
     </div>
   );
 };
