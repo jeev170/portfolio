@@ -153,7 +153,7 @@ export const CreativeLab = () => {
   };
 
   return (
-    <section id="lab" className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section id="lab" className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
@@ -163,24 +163,24 @@ export const CreativeLab = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Title */}
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-syne text-3xl md:text-6xl font-bold mb-4">
+          <h2 className="font-syne text-2xl md:text-5xl font-bold mb-2 md:mb-3">
             <span className="text-gradient">Creative</span>{" "}
             <span className="text-foreground">Lab</span>
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
+          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
             Create your own constellation — name it, save it, make it yours
           </p>
         </motion.div>
 
         {/* Controls */}
         <motion.div
-          className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mb-6 md:mb-8"
+          className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 md:gap-3 mb-4 md:mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -238,7 +238,7 @@ export const CreativeLab = () => {
           <div className="glass-strong rounded-2xl md:rounded-3xl p-2 overflow-hidden">
             <div
               ref={canvasRef}
-              className="relative w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] rounded-xl md:rounded-2xl cursor-crosshair overflow-hidden"
+              className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] rounded-xl md:rounded-2xl cursor-crosshair overflow-hidden"
               style={{ background: "rgba(10, 10, 26, 1)" }}
               onClick={handleCanvasClick}
             >

@@ -6,7 +6,6 @@ const navItems = [
   { name: "Home", sectionId: "home" },
   { name: "About", sectionId: "about" },
   { name: "Projects", sectionId: "projects" },
-  { name: "Photos", sectionId: "photos" },
   { name: "Blog", sectionId: "blog" },
   { name: "Skills", sectionId: "skills" },
   { name: "Lab", sectionId: "lab" },
